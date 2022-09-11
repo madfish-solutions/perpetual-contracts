@@ -313,8 +313,9 @@ export class DeployConfig {
                     [PriceFeedKey.SNX]: "0xDC3EA94CD0AC27d9A86C180091e7f78C683d3699",
                 }
                 break
-            case "staging":
+            case "baobab":
                 this.confirmations = 5
+                //TODO : Replace addressess
                 this.chainlinkMap = {
                     [PriceFeedKey.BTC]: "0xECe365B379E1dD183B20fc5f022230C044d51404",
                     [PriceFeedKey.ETH]: "0x8A753747A1Fa494EC906cE90E9f37563A8AF630e",
@@ -323,7 +324,7 @@ export class DeployConfig {
                     [PriceFeedKey.SDEFI]: "0x0630521aC362bc7A19a4eE44b57cE72Ea34AD01c",
                 }
                 break
-            case "test":
+            case "local":
                 this.confirmations = 1
                 this.chainlinkMap = {
                     // fake address

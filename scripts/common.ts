@@ -1,6 +1,6 @@
 // all lower-case, no dash; otherwise AWS deployment might fail
-export type Stage = "production" | "staging" | "test"
-export type Network = "homestead" | "rinkeby" | "ropsten" | "kovan" | "xdai" | "sokol" | "localhost" | "hardhat"
+export type Stage = "production" | "baobab" | "local"
+export type Network =  "baobab" | "diodon" | "localhost" | "hardhat"
 export enum Layer {
     Layer1 = "layer1",
     Layer2 = "layer2",
@@ -9,14 +9,10 @@ export enum Layer {
 // openzeppelin can't recognize xdai network
 // so we use this this to map the network to openzeppelin config json file name
 export const ozNetworkFile: Record<Network, string> = {
-    homestead: "mainnet",
-    rinkeby: "rinkeby",
-    kovan: "kovan",
-    ropsten: "ropsten",
     localhost: "unknown-31337",
     hardhat: "unknown-31337",
-    xdai: "unknown-100",
-    sokol: "unknown-77",
+    baobab: "unknown-1001",
+    diodon: "unknown-1042",
 }
 
 // TODO deprecated

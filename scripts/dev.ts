@@ -35,7 +35,7 @@ export async function devEvm(): Promise<void> {
                     // This is so that we could re-use the scripts for creating metadata/${stage}.json
                     // await asyncExec("hardhat run --network localhost scripts/deploy.ts", { cwd, env })
 
-                    await deploy("test", { cwd, env })
+                    await deploy("local", { cwd, env })
                     // // onDeployed() must return true if it wishes to keep hardhat node running
                     // if (onDeployed && !(await onDeployed())) {
                     //     console.log("killing ethereum node...")

@@ -3,7 +3,7 @@ import { ShellString } from "shelljs"
 import { ExternalContracts, Layer, MigrationIndex, Network, Stage, SystemDeploySettings } from "../scripts/common"
 import { getSettingsFile } from "../scripts/path"
 import production from "./settings/production.json"
-import staging from "./settings/staging.json"
+import baobab from "./settings/baobab.json"
 
 export class SettingsDao {
     readonly settingsCached!: SystemDeploySettings
@@ -12,10 +12,10 @@ export class SettingsDao {
             case "production":
                 this.settingsCached = production as SystemDeploySettings
                 break
-            case "staging":
-                this.settingsCached = staging as SystemDeploySettings
+            case "baobab":
+                this.settingsCached = baobab as SystemDeploySettings
                 break
-            case "test":
+            case "local":
                 try {
                     this.settingsCached = require(this.settingsFilePath)
                 } catch (e) {
@@ -113,6 +113,6 @@ export class SettingsDao {
     }
 
     isLocal(): boolean {
-        return this.stage === "test"
+        return this.stage === "local"
     }
 }

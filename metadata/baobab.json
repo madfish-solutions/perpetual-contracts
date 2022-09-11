@@ -1,8 +1,14 @@
 {
   "layers": {
     "layer1": {
-      "chainId": 4,
-      "network": "rinkeby",
+      "contracts": {
+        "RootBridge": {
+          "name": "RootBridge",
+          "address": "0x4D6ED06E23b8ab9E9Dae346E757f9b22Ee068A0C"
+        }
+      },
+      "accounts": [],
+      "network": "baobab",
       "externalContracts": {
         "foundationGovernance": "0xa230A4f6F38D904C2eA1eE95d8b2b8b7350e3d79",
         "rewardGovernance": "0x7cd11681690d25DAA202550E1B3F314C74A0Acd6",
@@ -16,8 +22,26 @@
       }
     },
     "layer2": {
-      "chainId": 100,
-      "network": "xdai",
+      "contracts": {
+        "MetaTxGateway": {
+          "name": "MetaTxGateway",
+          "address": "0x7926f05cd8a1cA548e07368164A5722e6b9E5F1d"
+        },
+        "ClientBridge": {
+          "name": "ClientBridge",
+          "address": "0x143bd176c3D13E5627838C4fE8a1F39C2494E4d8"
+        },
+        "InsuranceFund": {
+          "name": "InsuranceFund",
+          "address": "0xbc194472C2E9c560A24Ae7d140C63ffB98f5f756"
+        },
+        "L2PriceFeed": {
+          "name": "L2PriceFeed",
+          "address": "0xC17fb5e04700022C2a3E21b20BA2450B8d102aA2"
+        }
+      },
+      "accounts": [],
+      "network": "diodon",
       "externalContracts": {
         "foundationGovernance": "0x44883405Eb9826448d3E8eCC25889C5941E79d9b",
         "arbitrageur": "0xf76cFe9FcAFA43Ab5E1B74030BA329b291c545c9",
@@ -30,9 +54,5 @@
         "referral": "0xEBF01cc4af96cfE356c90aB6AE9f83A0D6d8b6A4"
       }
     }
-  },
-  "nextMigration": {
-    "batchIndex": 46,
-    "taskIndex": 0
   }
 }
