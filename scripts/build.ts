@@ -67,7 +67,7 @@ function generateContractMetadata(): void {
         })
     printTopNContractSize(codeSizeMap)
 
-    const settingsDao = new SettingsDao("test")
+    const settingsDao = new SettingsDao("local")
     const systemMetadataDao = new SystemMetadataDao(settingsDao)
     systemMetadataDao.setLayerMetadata(
         Layer.Layer2, // for now, test stage builds put everything in layer2
