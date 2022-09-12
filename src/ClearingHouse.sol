@@ -34,9 +34,9 @@ contract ClearingHouse is
     //
     // EVENTS
     //
-    event MarginRatioChanged(uint256 marginRatio);
-    event LiquidationFeeRatioChanged(uint256 liquidationFeeRatio);
-    event BackstopLiquidityProviderChanged(address indexed account, bool indexed isProvider);
+    // event MarginRatioChanged(uint256 marginRatio);
+    // event LiquidationFeeRatioChanged(uint256 liquidationFeeRatio);
+    // event BackstopLiquidityProviderChanged(address indexed account, bool indexed isProvider);
     event MarginChanged(address indexed sender, address indexed amm, int256 amount, int256 fundingPayment);
     event PositionAdjusted(
         address indexed amm,
@@ -96,7 +96,7 @@ contract ClearingHouse is
         uint256 badDebt
     );
 
-    event ReferredPositionChanged(bytes32 indexed referralCode);
+    // event ReferredPositionChanged(bytes32 indexed referralCode);
 
     //
     // Struct and Enum
@@ -217,12 +217,12 @@ contract ClearingHouse is
     ) public initializer {
         require(address(_insuranceFund) != address(0), "Invalid IInsuranceFund");
 
-        __OwnerPausable_init();
+        __Ownable_init_unchained();
 
         // comment these out for reducing bytecode size
         __ReentrancyGuard_init();
 
-        versionRecipient = "1.0.0"; // we are not using it atm
+        // versionRecipient = "1.0.0"; // we are not using it atm
         initMarginRatio = Decimal.decimal(_initMarginRatio);
         maintenanceMarginRatio = Decimal.decimal(_maintenanceMarginRatio);
         liquidationFeeRatio = Decimal.decimal(_liquidationFeeRatio);
@@ -241,7 +241,6 @@ contract ClearingHouse is
      */
     function setLiquidationFeeRatio(Decimal.decimal memory _liquidationFeeRatio) external onlyOwner {
         liquidationFeeRatio = _liquidationFeeRatio;
-        emit LiquidationFeeRatioChanged(liquidationFeeRatio.toUint());
     }
 
     /**
@@ -251,7 +250,6 @@ contract ClearingHouse is
      */
     function setMaintenanceMarginRatio(Decimal.decimal memory _maintenanceMarginRatio) external onlyOwner {
         maintenanceMarginRatio = _maintenanceMarginRatio;
-        emit MarginRatioChanged(maintenanceMarginRatio.toUint());
     }
 
     /**
@@ -279,7 +277,7 @@ contract ClearingHouse is
      */
     function setBackstopLiquidityProvider(address account, bool isProvider) external onlyOwner {
         backstopLiquidityProviderMap[account] = isProvider;
-        emit BackstopLiquidityProviderChanged(account, isProvider);
+        // emit BackstopLiquidityProviderChanged(account, isProvider);
     }
 
     /**
@@ -425,28 +423,28 @@ contract ClearingHouse is
     //   pay liquidation fee to liquidator
     //   move the remain margin to insuranceFund
 
-    /**
-     * @notice open a position with referral code
-     * @param _amm amm address
-     * @param _side enum Side; BUY for long and SELL for short
-     * @param _quoteAssetAmount quote asset amount in 18 digits. Can Not be 0
-     * @param _leverage leverage  in 18 digits. Can Not be 0
-     * @param _baseAssetAmountLimit minimum base asset amount expected to get to prevent from slippage.
-     * @param _referralCode referral code
-     */
-    function openPositionWithReferral(
-        IAmm _amm,
-        Side _side,
-        Decimal.decimal calldata _quoteAssetAmount,
-        Decimal.decimal calldata _leverage,
-        Decimal.decimal calldata _baseAssetAmountLimit,
-        bytes32 _referralCode
-    ) external {
-        openPosition(_amm, _side, _quoteAssetAmount, _leverage, _baseAssetAmountLimit);
-        // if (_referralCode != 0) {
-        //     emit ReferredPositionChanged(_referralCode);
-        // }
-    }
+    // /**
+    //  * @notice open a position with referral code
+    //  * @param _amm amm address
+    //  * @param _side enum Side; BUY for long and SELL for short
+    //  * @param _quoteAssetAmount quote asset amount in 18 digits. Can Not be 0
+    //  * @param _leverage leverage  in 18 digits. Can Not be 0
+    //  * @param _baseAssetAmountLimit minimum base asset amount expected to get to prevent from slippage.
+    //  * @param _referralCode referral code
+    //  */
+    // function openPositionWithReferral(
+    //     IAmm _amm,
+    //     Side _side,
+    //     Decimal.decimal calldata _quoteAssetAmount,
+    //     Decimal.decimal calldata _leverage,
+    //     Decimal.decimal calldata _baseAssetAmountLimit,
+    //     bytes32 _referralCode
+    // ) external {
+    //     openPosition(_amm, _side, _quoteAssetAmount, _leverage, _baseAssetAmountLimit);
+    //     // if (_referralCode != 0) {
+    //     //     emit ReferredPositionChanged(_referralCode);
+    //     // }
+    // }
 
     /**
      * @notice open a position
@@ -540,21 +538,21 @@ contract ClearingHouse is
         );
     }
 
-    /**
-     * @notice close position with referral code
-     * @param _amm IAmm address
-     * @param _referralCode referral code
-     */
-    function closePositionWithReferral(
-        IAmm _amm,
-        Decimal.decimal calldata _quoteAssetAmountLimit,
-        bytes32 _referralCode
-    ) external {
-        closePosition(_amm, _quoteAssetAmountLimit);
-        // if (_referralCode != 0) {
-        //     emit ReferredPositionChanged(_referralCode);
-        // }
-    }
+    // /**
+    //  * @notice close position with referral code
+    //  * @param _amm IAmm address
+    //  * @param _referralCode referral code
+    //  */
+    // function closePositionWithReferral(
+    //     IAmm _amm,
+    //     Decimal.decimal calldata _quoteAssetAmountLimit,
+    //     bytes32 _referralCode
+    // ) external {
+    //     closePosition(_amm, _quoteAssetAmountLimit);
+    //     // if (_referralCode != 0) {
+    //     //     emit ReferredPositionChanged(_referralCode);
+    //     // }
+    // }
 
     /**
      * @notice close all the positions
