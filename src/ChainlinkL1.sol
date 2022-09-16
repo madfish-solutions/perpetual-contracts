@@ -5,8 +5,10 @@ pragma experimental ABIEncoderV2;
 import { AggregatorV3Interface } from "@chainlink/contracts/src/v0.6/interfaces/AggregatorV3Interface.sol";
 import { BlockContext } from "./utils/BlockContext.sol";
 import { PerpFiOwnableUpgrade } from "./utils/PerpFiOwnableUpgrade.sol";
-import { RootBridge } from "./bridge/ethereum/RootBridge.sol";
+
 import { Decimal, SafeMath } from "./utils/Decimal.sol";
+import { ContextUpgradeSafe } from "@openzeppelin/contracts-ethereum-package/contracts/GSN/Context.sol";
+import { Ownable } from "@openzeppelin/contracts/access/Ownable.sol";
 
 contract ChainlinkL1 is PerpFiOwnableUpgrade, BlockContext {
     using SafeMath for uint256;
@@ -14,8 +16,6 @@ contract ChainlinkL1 is PerpFiOwnableUpgrade, BlockContext {
 
     uint256 private constant TOKEN_DIGIT = 10**18;
 
-    event RootBridgeChanged(address rootBridge);
-    event PriceFeedL2Changed(address priceFeedL2);
     event PriceUpdateMessageIdSent(bytes32 messageId);
     event PriceUpdated(uint80 roundId, uint256 price, uint256 timestamp);
 
@@ -26,9 +26,19 @@ contract ChainlinkL1 is PerpFiOwnableUpgrade, BlockContext {
     // key by currency symbol, eg ETH
     mapping(bytes32 => AggregatorV3Interface) public priceFeedMap;
     bytes32[] public priceFeedKeys;
-    RootBridge public rootBridge;
-    address public priceFeedL2Address;
+    address public priceFeedAddress;
     mapping(bytes32 => uint256) public prevTimestampMap;
+
+    struct PriceData {
+        uint256 roundId;
+        uint256 price;
+        uint256 timestamp;
+    }
+    struct PriceFeed {
+        bool registered;
+        PriceData[] priceData;
+    }
+    mapping(bytes32 => PriceFeed) public priceMap;
 
     //**********************************************************//
     //    The above state variables can not change the order    //
@@ -42,22 +52,8 @@ contract ChainlinkL1 is PerpFiOwnableUpgrade, BlockContext {
     //
     // FUNCTIONS
     //
-    function initialize(address _rootBridge, address _priceFeedL2) public initializer {
+    function initialize() public initializer {
         __Ownable_init();
-        setRootBridge(_rootBridge);
-        setPriceFeedL2(_priceFeedL2);
-    }
-
-    function setRootBridge(address _rootBridge) public onlyOwner {
-        requireNonEmptyAddress(_rootBridge);
-        rootBridge = RootBridge(_rootBridge);
-        emit RootBridgeChanged(_rootBridge);
-    }
-
-    function setPriceFeedL2(address _priceFeedL2) public onlyOwner {
-        requireNonEmptyAddress(_priceFeedL2);
-        priceFeedL2Address = _priceFeedL2;
-        emit PriceFeedL2Changed(_priceFeedL2);
     }
 
     function addAggregator(bytes32 _priceFeedKey, address _aggregator) external onlyOwner {
@@ -66,6 +62,7 @@ contract ChainlinkL1 is PerpFiOwnableUpgrade, BlockContext {
             priceFeedKeys.push(_priceFeedKey);
         }
         priceFeedMap[_priceFeedKey] = AggregatorV3Interface(_aggregator);
+        priceMap[_priceFeedKey].registered = true;
     }
 
     function removeAggregator(bytes32 _priceFeedKey) external onlyOwner {
@@ -104,12 +101,39 @@ contract ChainlinkL1 is PerpFiOwnableUpgrade, BlockContext {
         uint8 decimals = aggregator.decimals();
 
         Decimal.decimal memory decimalPrice = Decimal.decimal(formatDecimals(uint256(price), decimals));
-        bytes32 messageId =
-            rootBridge.updatePriceFeed(priceFeedL2Address, _priceFeedKey, decimalPrice, timestamp, roundId);
-        emit PriceUpdateMessageIdSent(messageId);
+
+        PriceData memory data = PriceData({ price: decimalPrice.toUint(), timestamp: timestamp, roundId: roundId });
+        priceMap[_priceFeedKey].priceData.push(data);
         emit PriceUpdated(roundId, decimalPrice.toUint(), timestamp);
 
         prevTimestampMap[_priceFeedKey] = timestamp;
+    }
+
+    function getPrice(bytes32 _priceFeedKey) external view returns (uint256) {
+        require(isExistedKey(_priceFeedKey), "key not existed");
+        uint256 len = getPriceFeedLength(_priceFeedKey);
+        require(len > 0, "no price data");
+        return priceMap[_priceFeedKey].priceData[len - 1].price;
+    }
+
+    function getPreviousPrice(bytes32 _priceFeedKey, uint256 _numOfRoundBack) public view returns (uint256) {
+        require(isExistedKey(_priceFeedKey), "key not existed");
+
+        uint256 len = getPriceFeedLength(_priceFeedKey);
+        require(len > 0 && _numOfRoundBack < len, "Not enough history");
+        return priceMap[_priceFeedKey].priceData[len - _numOfRoundBack - 1].price;
+    }
+
+    function getPriceFeedLength(bytes32 _priceFeedKey) public view returns (uint256 length) {
+        return priceMap[_priceFeedKey].priceData.length;
+    }
+
+    function getLatestRoundId(bytes32 _priceFeedKey) internal view returns (uint256) {
+        uint256 len = getPriceFeedLength(_priceFeedKey);
+        if (len == 0) {
+            return 0;
+        }
+        return priceMap[_priceFeedKey].priceData[len - 1].roundId;
     }
 
     //
@@ -123,6 +147,11 @@ contract ChainlinkL1 is PerpFiOwnableUpgrade, BlockContext {
     //
     // INTERNAL VIEW FUNCTIONS
     //
+
+    function isExistedKey(bytes32 _priceFeedKey) private view returns (bool) {
+        return priceMap[_priceFeedKey].registered;
+    }
+
     function formatDecimals(uint256 _price, uint8 _decimals) internal pure returns (uint256) {
         return _price.mul(TOKEN_DIGIT).div(10**uint256(_decimals));
     }
