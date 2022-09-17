@@ -5,7 +5,7 @@ import hre, { artifacts, ethers, upgrades } from "hardhat"
 import { TASK_COMPILE } from "hardhat/builtin-tasks/task-names"
 import { LEGACY_SRC_DIR, SRC_DIR } from "../../constants"
 import { flatten } from "../../scripts/flatten"
-import { ChainlinkPriceFeed, ClearingHouse, L2PriceFeed } from "../../types/ethers"
+import { ChainlinkPriceFeed, ClearingHouse, ChainlinkL1 } from "../../types/ethers"
 import { ContractFullyQualifiedName, ContractName } from "../ContractName"
 import { MigrationContext, MigrationTask } from "../Migration"
 import { ContractWrapperFactory } from "./ContractWrapperFactory"
@@ -57,7 +57,7 @@ export function makeAmmV1DeployMigrationTasks(
             console.log(`deploy ${ammConfig.name} amm...`)
             const filename = `${ContractName.AmmV1}.sol`
             const toFilename = `${ContractName.Amm}.sol`
-            const l2PriceFeedContract = context.factory.create<L2PriceFeed>(ContractFullyQualifiedName.L2PriceFeed)
+            const l2PriceFeedContract = context.factory.create<ChainlinkL1>(ContractFullyQualifiedName.ChainlinkL1)
 
             if (needFlatten) {
                 // after flatten sol file we must re-compile again
@@ -66,7 +66,7 @@ export function makeAmmV1DeployMigrationTasks(
             }
 
             const ammContract = context.factory.createAmm(ammConfig.name, ContractFullyQualifiedName.FlattenAmm)
-            const quoteTokenAddr = context.externalContract.usdc!
+            const quoteTokenAddr = context.externalContract.kdai!
             await ammContract.deployUpgradableContract(
                 ammConfig.deployArgs,
                 l2PriceFeedContract.address!,
@@ -102,16 +102,6 @@ export function makeAmmV1DeployMigrationTasks(
                 .instance()
             await (await amm.setOpen(true)).wait(context.deployConfig.confirmations)
         },
-        async (): Promise<void> => {
-            const gov = context.externalContract.foundationGovernance!
-            console.log(
-                `transferring ${ammConfig.name} owner to governance=${gov}...please remember to claim the ownership`,
-            )
-            const amm = await context.factory
-                .createAmm(ammConfig.name, ContractFullyQualifiedName.FlattenAmm)
-                .instance()
-            await (await amm.setOwner(gov)).wait(context.deployConfig.confirmations)
-        },
     ]
 }
 
@@ -133,7 +123,7 @@ export function makeAmmDeployMigrationTasks(
             }
 
             const ammContract = context.factory.createAmm(ammConfig.name, ContractFullyQualifiedName.FlattenAmm)
-            const quoteTokenAddr = context.externalContract.usdc!
+            const quoteTokenAddr = context.externalContract.kdai!
             await ammContract.deployUpgradableContract(ammConfig.deployArgs, priceFeedAddress, quoteTokenAddr)
         },
         async (): Promise<void> => {
@@ -165,16 +155,6 @@ export function makeAmmDeployMigrationTasks(
                 .instance()
             await (await amm.setOpen(true)).wait(context.deployConfig.confirmations)
         },
-        async (): Promise<void> => {
-            const gov = context.externalContract.foundationGovernance!
-            console.log(
-                `transferring ${ammConfig.name} owner to governance=${gov}...please remember to claim the ownership`,
-            )
-            const amm = await context.factory
-                .createAmm(ammConfig.name, ContractFullyQualifiedName.FlattenAmm)
-                .instance()
-            await (await amm.setOwner(gov)).wait(context.deployConfig.confirmations)
-        },
     ]
 }
 
@@ -185,7 +165,7 @@ export async function addAggregator(
     confirmations: number,
 ): Promise<void> {
     const chainlinkPriceFeed = await factory
-        .create<ChainlinkPriceFeed>(ContractFullyQualifiedName.ChainlinkPriceFeed)
+        .create<ChainlinkPriceFeed>(ContractFullyQualifiedName.ChainlinkL1)
         .instance()
     const tx = await chainlinkPriceFeed.addAggregator(ethers.utils.formatBytes32String(priceFeedKey), address)
     await tx.wait(confirmations)
