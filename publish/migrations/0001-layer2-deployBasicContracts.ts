@@ -29,7 +29,6 @@ const migration: MigrationDefinition = {
             const insuranceFundContract = context.factory.create<InsuranceFund>(
                 ContractFullyQualifiedName.InsuranceFund,
             )
-
             await context.factory
               .create<ClearingHouse>(ContractFullyQualifiedName.ClearingHouse)
               .deployUpgradableContract(
@@ -37,7 +36,7 @@ const migration: MigrationDefinition = {
                 context.deployConfig.maintenanceMarginRequirement,
                 context.deployConfig.liquidationFeeRatio,
                 insuranceFundContract.address!,
-                context.externalContract.trustedForwarder,
+                context.externalContract.trustedForwarder!,
               );
         },
         async (): Promise<void> => {
@@ -65,6 +64,7 @@ const migration: MigrationDefinition = {
             const ammName = AmmInstanceName.AAPLKDAI
             const ammContract = context.factory.createAmm(ammName, ContractFullyQualifiedName.AmmV1)
             const quoteTokenAddr = context.externalContract.kdai!
+            console.log(oracle.address);
             await ammContract.deployUpgradableContract(
                 context.deployConfig.legacyAmmConfigMap[ammName].deployArgs,
                 oracle.address!,
@@ -138,6 +138,7 @@ const migration: MigrationDefinition = {
             const amm = await context.factory
                 .createAmm(AmmInstanceName.AMDKDAI, ContractFullyQualifiedName.AmmV1)
                 .instance()
+
             const { maxHoldingBaseAsset, openInterestNotionalCap } = context.deployConfig.legacyAmmConfigMap[
                 AmmInstanceName.AMDKDAI
             ].properties
@@ -167,7 +168,7 @@ const migration: MigrationDefinition = {
             await (await insuranceFund.addAmm(ammContract.address!)).wait(context.deployConfig.confirmations)
         },
         async (): Promise<void> => {
-            console.log("opening Amm ETHUSDC...")
+            console.log("opening Amm AAPLUSDC...")
             const aapleKDai = await context.factory
                 .createAmm(AmmInstanceName.AAPLKDAI, ContractFullyQualifiedName.AmmV1)
                 .instance()

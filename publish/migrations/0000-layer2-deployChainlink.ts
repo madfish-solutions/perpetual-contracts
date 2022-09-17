@@ -9,11 +9,14 @@ import { MigrationContext, MigrationDefinition } from "../Migration"
 const migration: MigrationDefinition = {
   getTasks: (context: MigrationContext) => [
     async (): Promise<void> => {
-      console.log("deploy root bridge");
-      const priceFeedContract = await context.factory
-        .create<ChainlinkL1>(ContractFullyQualifiedName.ChainlinkL1)
-        .instance();
-      console.log(priceFeedContract);
+      console.log("deploy Chainlink PriceFeed");
+      // await context.factory
+      //   .create<ChainlinkL1>(ContractFullyQualifiedName.ChainlinkL1)
+      //   .instance();
+      
+     const priceFeedContract = await context.factory
+       .create<ChainlinkL1>(ContractFullyQualifiedName.ChainlinkL1)
+       .deployUpgradableContract();
     },
 
     async (): Promise<void> => {

@@ -1,6 +1,6 @@
 export enum AmmInstanceName {
   AAPLKDAI = "AAPLKDAI",
-  AMDKDAI = "AAPLKDAI",
+  AMDKDAI = "AMDKDAI",
 
 }
 

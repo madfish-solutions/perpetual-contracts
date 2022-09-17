@@ -8,8 +8,8 @@
         "rewardGovernance": "0x9FE5f5bbbD3f2172Fa370068D26185f3d82ed9aC",
         "diodonBridge": "0xD4075FB57fCf038bFc702c915Ef9592534bED5c1",
         "baobabBridge": "0x30F693708fc604A57F1958E3CFa059F902e6d4CB",
-        "trustedForwared": "0x68dfc526037E9030c8F813D014919CC89E7d4d74",
-        "chainlinkOracle": "0x68dfc526037E9030c8F813D014919CC89E7d4d74"
+        "chainlinkOracle": "0x68dfc526037E9030c8F813D014919CC89E7d4d74",
+        "kdai": "0x68dfc526037E9030c8F813D014919CC89E7d4d74"
       }
     },
     "layer2": {
@@ -22,7 +22,8 @@
         "baobabBridge": "0x30F693708fc604A57F1958E3CFa059F902e6d4CB",
         "arbitrageur": "0x68dfc526037E9030c8F813D014919CC89E7d4d74",
         "chainlinkOracle": "0x68dfc526037E9030c8F813D014919CC89E7d4d74",
-        "trustedForwared": "0x68dfc526037E9030c8F813D014919CC89E7d4d74"
+        "trustedForwarder": "0x68dfc526037E9030c8F813D014919CC89E7d4d74",
+        "kdai": "0x68dfc526037E9030c8F813D014919CC89E7d4d74"
       }
     }
   },
