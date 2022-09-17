@@ -49,26 +49,23 @@ export interface SystemMetadata {
 
 export interface ExternalContracts {
     // default is gnosis multisig safe which plays the governance role
-    foundationGovernance?: string
     rewardGovernance?: string
     arbitrageur?: string
     testnetFaucet?: string
 
     // https://docs.tokenbridge.net/eth-xdai-amb-bridge/about-the-eth-xdai-amb
-    ambBridgeOnXDai?: string
-    ambBridgeOnEth?: string
+    baobabBridge?: string
+    diodonBridge?: string
+    chainlinkOracle?: string
 
     // https://docs.tokenbridge.net/eth-xdai-amb-bridge/multi-token-extension#omnibridge-technical-information-and-extension-parameters
-    multiTokenMediatorOnXDai?: string
-    multiTokenMediatorOnEth?: string
 
     // https://blockscout.com/poa/xdai/bridged-tokens (if it's in xdai)
-    tether?: string
-    usdc?: string
-    perp?: string
+    kdai?: string
 
     // https://docs.openzeppelin.com/upgrades/2.8/api#ProxyAdmin
-    proxyAdmin?: string
+    proxyAdmin?: string,
+    trustedForwarder?: string,
 }
 
 export interface LayerDeploySettings {
