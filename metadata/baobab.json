@@ -2,56 +2,67 @@
   "layers": {
     "layer1": {
       "contracts": {
-        "RootBridge": {
-          "name": "RootBridge",
-          "address": "0x4D6ED06E23b8ab9E9Dae346E757f9b22Ee068A0C"
+        "Chainlink": {
+          "name": "Chainlink",
+          "address": "0xE6e405942590348d7a49BDb07248D485731bB274"
         }
       },
       "accounts": [],
       "network": "baobab",
       "externalContracts": {
-        "foundationGovernance": "0xa230A4f6F38D904C2eA1eE95d8b2b8b7350e3d79",
-        "rewardGovernance": "0x7cd11681690d25DAA202550E1B3F314C74A0Acd6",
-        "perp": "0xaFfB148304D38947193785D194972a7d0d9b7F68",
-        "tether": "0x40D3B2F06f198D2B789B823CdBEcD1DB78090D74",
-        "usdc": "0x40D3B2F06f198D2B789B823CdBEcD1DB78090D74",
         "testnetFaucet": "0x9E9DFaCCABeEcDA6dD913b3685c9fe908F28F58c",
-        "ambBridgeOnEth": "0xD4075FB57fCf038bFc702c915Ef9592534bED5c1",
-        "multiTokenMediatorOnEth": "0x30F693708fc604A57F1958E3CFa059F902e6d4CB",
-        "proxyAdmin": "0x0C55fE453eC5166FA56e495Dc02953cB0E29A67a"
+        "rewardGovernance": "0x9FE5f5bbbD3f2172Fa370068D26185f3d82ed9aC",
+        "diodonBridge": "0xD4075FB57fCf038bFc702c915Ef9592534bED5c1",
+        "baobabBridge": "0x30F693708fc604A57F1958E3CFa059F902e6d4CB",
+        "arbitrageur": "0x68dfc526037E9030c8F813D014919CC89E7d4d74",
+        "proxyAdmin": "0x3CC65Fc53C0f6B0fF70dee20cCda03B88BeA67c3"
       }
     },
     "layer2": {
       "contracts": {
-        "MetaTxGateway": {
-          "name": "MetaTxGateway",
-          "address": "0x7926f05cd8a1cA548e07368164A5722e6b9E5F1d"
-        },
-        "ClientBridge": {
-          "name": "ClientBridge",
-          "address": "0x143bd176c3D13E5627838C4fE8a1F39C2494E4d8"
-        },
         "InsuranceFund": {
           "name": "InsuranceFund",
-          "address": "0xbc194472C2E9c560A24Ae7d140C63ffB98f5f756"
+          "address": "0x8e84fdB6bbA70EB46389325Ea31Bdcc1769aFFF9"
         },
-        "L2PriceFeed": {
-          "name": "L2PriceFeed",
-          "address": "0xC17fb5e04700022C2a3E21b20BA2450B8d102aA2"
+        "ClearingHouse": {
+          "name": "ClearingHouse",
+          "address": "0x1aE31D581EFb7097d6c2A6236E671a01b22e49bA"
+        },
+        "ClearingHouseViewer": {
+          "name": "ClearingHouseViewer",
+          "address": "0xC653E4F322BA54744765ff7285AD74BE9fCfFd61"
+        },
+        "AmmReader": {
+          "name": "AmmReader",
+          "address": "0x8690606FFA351C44A6479561A8B3B36759c24723"
+        },
+        "Chainlink": {
+          "name": "Chainlink",
+          "address": "0x2443Bb9ceD3ef1cBf6248c54f373D518311C0500"
+        },
+        "AAPLKDAI": {
+          "name": "Amm",
+          "address": "0xaEC251B2A79A4138A6d9dFd948B3D0183fA0870A"
+        },
+        "AMDKDAI": {
+          "name": "Amm",
+          "address": "0xA1A1c312181200259558004AAd01BdAEa747566e"
         }
       },
       "accounts": [],
       "network": "diodon",
       "externalContracts": {
-        "foundationGovernance": "0x44883405Eb9826448d3E8eCC25889C5941E79d9b",
-        "arbitrageur": "0xf76cFe9FcAFA43Ab5E1B74030BA329b291c545c9",
-        "testnetFaucet": "0x9E9DFaCCABeEcDA6dD913b3685c9fe908F28F58c",
-        "ambBridgeOnXDai": "0xc38D4991c951fE8BCE1a12bEef2046eF36b0FA4A",
-        "multiTokenMediatorOnXDai": "0xA34c65d76b997a824a5E384471bBa73b0013F5DA",
-        "tether": "0xe0B887D54e71329318a036CF50f30Dbe4444563c",
-        "usdc": "0xe0B887D54e71329318a036CF50f30Dbe4444563c",
-        "proxyAdmin": "0x773F8ff05Faa57F915a70713CD33787F826ECdc7",
-        "referral": "0xEBF01cc4af96cfE356c90aB6AE9f83A0D6d8b6A4"
+        "rewardGovernance": "",
+        "diodonBridge": "0xD4075FB57fCf038bFc702c915Ef9592534bED5c1",
+        "baobabBridge": "0x30F693708fc604A57F1958E3CFa059F902e6d4CB",
+        "arbitrageur": "0x3CC65Fc53C0f6B0fF70dee20cCda03B88BeA67c3",
+        "proxyAdmin": "0x3CC65Fc53C0f6B0fF70dee20cCda03B88BeA67c3",
+        "referral": "0x30F693708fc604A57F1958E3CFa059F902e6d4CB",
+        "chainlinkOracle": "0x30F693708fc604A57F1958E3CFa059F902e6d4CB",
+        "aaplOracle": "0xf3CD5A5a6bcC3D1Db11191ab121fE9022013F22f",
+        "amdOracle": "0x04Bc70Bf89eF7af019fc2bFD0f1e7b2B0Fd25788",
+        "kdai": "0x6BaF15727bCABBB6765d7e35866f14256C638BDc",
+        "trustedForwarder": "0x3CC65Fc53C0f6B0fF70dee20cCda03B88BeA67c3"
       }
     }
   }
