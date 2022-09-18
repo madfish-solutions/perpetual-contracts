@@ -30,7 +30,6 @@ const migration: MigrationDefinition = {
                 context.deployConfig.maintenanceMarginRequirement,
                 context.deployConfig.liquidationFeeRatio,
                 insuranceFundContract.address!,
-                context.externalContract.trustedForwarder!,
               );
         },
         async (): Promise<void> => {
@@ -58,7 +57,6 @@ const migration: MigrationDefinition = {
             const ammName = AmmInstanceName.AAPLKDAI
             const ammContract = context.factory.createAmm(ammName, ContractFullyQualifiedName.AmmV1)
             const quoteTokenAddr = context.externalContract.kdai!
-            console.log(oracle.address);
             await ammContract.deployUpgradableContract(
                 context.deployConfig.legacyAmmConfigMap[ammName].deployArgs,
                 oracle.address!,
