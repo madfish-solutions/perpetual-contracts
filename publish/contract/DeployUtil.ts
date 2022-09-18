@@ -5,7 +5,7 @@ import hre, { artifacts, ethers, upgrades } from "hardhat"
 import { TASK_COMPILE } from "hardhat/builtin-tasks/task-names"
 import { LEGACY_SRC_DIR, SRC_DIR } from "../../constants"
 import { flatten } from "../../scripts/flatten"
-import { ChainlinkPriceFeed, ClearingHouse, ChainlinkL1 } from "../../types/ethers"
+import { Chainlink, ChainlinkPriceFeed, ClearingHouse } from "../../types/ethers"
 import { ContractFullyQualifiedName, ContractName } from "../ContractName"
 import { MigrationContext, MigrationTask } from "../Migration"
 import { ContractWrapperFactory } from "./ContractWrapperFactory"
@@ -57,7 +57,7 @@ export function makeAmmV1DeployMigrationTasks(
             console.log(`deploy ${ammConfig.name} amm...`)
             const filename = `${ContractName.AmmV1}.sol`
             const toFilename = `${ContractName.Amm}.sol`
-            const l2PriceFeedContract = context.factory.create<ChainlinkL1>(ContractFullyQualifiedName.ChainlinkL1)
+            const l2PriceFeedContract = context.factory.create<Chainlink>(ContractFullyQualifiedName.Chainlink)
 
             if (needFlatten) {
                 // after flatten sol file we must re-compile again
@@ -165,7 +165,7 @@ export async function addAggregator(
     confirmations: number,
 ): Promise<void> {
     const chainlinkPriceFeed = await factory
-        .create<ChainlinkPriceFeed>(ContractFullyQualifiedName.ChainlinkL1)
+        .create<ChainlinkPriceFeed>(ContractFullyQualifiedName.Chainlink)
         .instance()
     const tx = await chainlinkPriceFeed.addAggregator(ethers.utils.formatBytes32String(priceFeedKey), address)
     await tx.wait(confirmations)

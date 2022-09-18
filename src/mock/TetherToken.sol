@@ -326,7 +326,7 @@ abstract contract UpgradedStandardToken is StandardToken {
     ) public virtual;
 }
 
-contract TetherToken is Pausable, StandardToken, BlackList {
+contract TokenMock is Pausable, StandardToken, BlackList {
     string public name;
     string public symbol;
     uint256 public decimals;

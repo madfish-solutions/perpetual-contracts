@@ -1,18 +1,12 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 
-import { ethers } from "ethers"
 import { Layer } from "../../scripts/common"
 import {
-    AmmReader,
-    ClearingHouse,
-    ClearingHouseViewer,
-    ChainlinkL1,
-    InsuranceFund,
+    AmmReader, Chainlink, ClearingHouse,
+    ClearingHouseViewer, InsuranceFund
 } from "../../types/ethers"
-import { PriceFeedKey } from "../contract/DeployConfig"
-import { AmmInstanceName, ContractFullyQualifiedName, ContractName } from "../ContractName"
+import { AmmInstanceName, ContractFullyQualifiedName } from "../ContractName"
 import { MigrationContext, MigrationDefinition } from "../Migration"
-import { OzContractDeployer } from "../OzContractDeployer"
 
 const migration: MigrationDefinition = {
     getTasks: (context: MigrationContext) => [
@@ -58,8 +52,8 @@ const migration: MigrationDefinition = {
         },
         async (): Promise<void> => {
             console.log("deploy AAPLkDAI amm...")
-            const oracle = context.factory.create<ChainlinkL1>(
-              ContractFullyQualifiedName.ChainlinkL1,
+            const oracle = context.factory.create<Chainlink>(
+              ContractFullyQualifiedName.Chainlink,
             );
             const ammName = AmmInstanceName.AAPLKDAI
             const ammContract = context.factory.createAmm(ammName, ContractFullyQualifiedName.AmmV1)
@@ -73,7 +67,7 @@ const migration: MigrationDefinition = {
         },
         async (): Promise<void> => {
             console.log("deploy AMDkDAI amm...")
-            const oracle = context.factory.create<ChainlinkL1>(ContractFullyQualifiedName.ChainlinkL1)
+            const oracle = context.factory.create<Chainlink>(ContractFullyQualifiedName.Chainlink)
             const ammName = AmmInstanceName.AMDKDAI
             const ammContract = context.factory.createAmm(ammName, ContractFullyQualifiedName.AmmV1)
             const quoteTokenAddr = context.externalContract.kdai!

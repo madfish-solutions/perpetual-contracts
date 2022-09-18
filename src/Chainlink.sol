@@ -10,7 +10,7 @@ import { Decimal, SafeMath } from "./utils/Decimal.sol";
 import { ContextUpgradeSafe } from "@openzeppelin/contracts-ethereum-package/contracts/GSN/Context.sol";
 import { Ownable } from "@openzeppelin/contracts/access/Ownable.sol";
 
-contract ChainlinkL1 is PerpFiOwnableUpgrade, BlockContext {
+contract Chainlink is PerpFiOwnableUpgrade, BlockContext {
     using SafeMath for uint256;
     using Decimal for Decimal.decimal;
 

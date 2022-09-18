@@ -2,9 +2,9 @@
 pragma solidity 0.6.9;
 pragma experimental ABIEncoderV2;
 
-import { ChainlinkL1 } from "../ChainlinkL1.sol";
+import { Chainlink } from "../Chainlink.sol";
 
-contract ChainlinkL1Fake is ChainlinkL1 {
+contract ChainlinkL1Fake is Chainlink {
     uint256 private timestamp = 1444004400;
     uint256 private number = 10001;
 
