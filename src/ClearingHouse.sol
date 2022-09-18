@@ -212,8 +212,7 @@ contract ClearingHouse is
         uint256 _initMarginRatio,
         uint256 _maintenanceMarginRatio,
         uint256 _liquidationFeeRatio,
-        IInsuranceFund _insuranceFund,
-        address _trustedForwarder
+        IInsuranceFund _insuranceFund
     ) public initializer {
         require(address(_insuranceFund) != address(0), "Invalid IInsuranceFund");
 
@@ -227,7 +226,6 @@ contract ClearingHouse is
         maintenanceMarginRatio = Decimal.decimal(_maintenanceMarginRatio);
         liquidationFeeRatio = Decimal.decimal(_liquidationFeeRatio);
         insuranceFund = _insuranceFund;
-        trustedForwarder = _trustedForwarder;
     }
 
     //

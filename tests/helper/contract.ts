@@ -155,7 +155,6 @@ export async function deployClearingHouse(
     maintenanceMarginRatio: Decimal,
     liquidationFeeRatio: Decimal,
     insuranceFund: string,
-    trustedForwarder: string,
 ): Promise<ClearingHouseFakeInstance> {
     const instance = await ClearingHouseFake.new()
     await instance.initialize_Fake(
@@ -163,7 +162,6 @@ export async function deployClearingHouse(
         maintenanceMarginRatio.d.toString(),
         liquidationFeeRatio.d.toString(),
         insuranceFund,
-        trustedForwarder,
     )
     return instance
 }
