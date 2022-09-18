@@ -48,24 +48,25 @@ export interface SystemMetadata {
 }
 
 export interface ExternalContracts {
-    // default is gnosis multisig safe which plays the governance role
-    rewardGovernance?: string
-    arbitrageur?: string
-    testnetFaucet?: string
+  // default is gnosis multisig safe which plays the governance role
+  rewardGovernance?: string;
+  arbitrageur?: string;
+  testnetFaucet?: string;
 
-    // https://docs.tokenbridge.net/eth-xdai-amb-bridge/about-the-eth-xdai-amb
-    baobabBridge?: string
-    diodonBridge?: string
-    chainlinkOracle?: string
+  // https://docs.tokenbridge.net/eth-xdai-amb-bridge/about-the-eth-xdai-amb
+  baobabBridge?: string;
+  diodonBridge?: string;
+  aaplOracle?: string;
+  amdOracle?: string;
 
-    // https://docs.tokenbridge.net/eth-xdai-amb-bridge/multi-token-extension#omnibridge-technical-information-and-extension-parameters
+  // https://docs.tokenbridge.net/eth-xdai-amb-bridge/multi-token-extension#omnibridge-technical-information-and-extension-parameters
 
-    // https://blockscout.com/poa/xdai/bridged-tokens (if it's in xdai)
-    kdai?: string
+  // https://blockscout.com/poa/xdai/bridged-tokens (if it's in xdai)
+  kdai?: string;
 
-    // https://docs.openzeppelin.com/upgrades/2.8/api#ProxyAdmin
-    proxyAdmin?: string,
-    trustedForwarder?: string,
+  // https://docs.openzeppelin.com/upgrades/2.8/api#ProxyAdmin
+  proxyAdmin?: string;
+  trustedForwarder?: string;
 }
 
 export interface LayerDeploySettings {
