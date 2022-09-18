@@ -66,7 +66,6 @@ export interface ExternalContracts {
 
   // https://docs.openzeppelin.com/upgrades/2.8/api#ProxyAdmin
   proxyAdmin?: string;
-  trustedForwarder?: string;
 }
 
 export interface LayerDeploySettings {
