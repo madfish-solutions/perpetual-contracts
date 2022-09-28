@@ -24,6 +24,7 @@ const DEFAULT_AMM_SPREAD_RATIO = BigNumber.from(10)
 export enum PriceFeedKey {
     AMD = "AMD",
     AAPL = "AAPL",
+    SHOP = "SHOP",
 }
 
 // amm
@@ -101,6 +102,32 @@ export const AAPL_USD_AMM: AmmConfig = {
     },
 }
 
+export const SHOP_USD_AMM: AmmConfig = {
+  name: AmmInstanceName.AAPLKDAI,
+  deployArgs: {
+    // base * price
+    quoteAssetReserve: BigNumber.from(10000000).mul(DEFAULT_DIGITS),
+    baseAssetReserve: BigNumber.from(20000).mul(DEFAULT_DIGITS), // 20000 ETH
+    tradeLimitRatio: BigNumber.from(90)
+      .mul(DEFAULT_DIGITS)
+      .div(100), // 90% trading limit ratio
+    fundingPeriod: BigNumber.from(3600), // 1 hour
+    fluctuation: BigNumber.from(12)
+      .mul(DEFAULT_DIGITS)
+      .div(1000), // 1.2%
+    priceFeedKey: PriceFeedKey.AAPL,
+    tollRatio: BigNumber.from(0)
+      .mul(DEFAULT_DIGITS)
+      .div(10000), // 0.0%
+    spreadRatio: BigNumber.from(10)
+      .mul(DEFAULT_DIGITS)
+      .div(10000), // 0.1%
+  },
+  properties: {
+    maxHoldingBaseAsset: DEFAULT_DIGITS.mul(10), // 10 ETH ~= $5000 USD
+    openInterestNotionalCap: BigNumber.from(DEFAULT_DIGITS).mul(500000), // $500K
+  },
+};
 
 const emptyAddr = "0x0000000000000000000000000000000000000001"
 export const dummyAmmArgs: any[] = [1, 1, 1, 1, emptyAddr, ethers.utils.formatBytes32String("AMD"), emptyAddr, 1, 1, 1]
@@ -167,6 +194,7 @@ export class DeployConfig {
     readonly legacyAmmConfigMap: Record<string, AmmConfig> = {
         [AmmInstanceName.AMDKDAI]: AMD_USD_AMM,
         [AmmInstanceName.AAPLKDAI]: AAPL_USD_AMM,
+        [AmmInstanceName.SHOPKDAI]: SHOP_USD_AMM,
     }
 
     // KeeperReward

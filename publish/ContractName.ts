@@ -1,13 +1,13 @@
 export enum AmmInstanceName {
   AAPLKDAI = "AAPLKDAI",
   AMDKDAI = "AMDKDAI",
+  SHOPKDAI = "SHOPKDAI",
 }
 
 export enum ContractName {
   MetaTxGateway = "MetaTxGateway",
   TokenMock = "TokenMock",
   InsuranceFund = "InsuranceFund",
-  Chainlink = "Chainlink",
   ClearingHouse = "ClearingHouse",
   ClearingHouseViewer = "ClearingHouseViewer",
   Amm = "Amm",
@@ -19,7 +19,7 @@ export enum ContractName {
 export enum ContractFullyQualifiedName {
   TokenMock = "src/mock/TokenMock.sol:TokenMock",
   InsuranceFund = "src/InsuranceFund.sol:InsuranceFund",
-  Chainlink = "src/Chainlink.sol:Chainlink",
+  ChainlinkPriceFeed = "src/ChainlinkPriceFeed.sol:ChainlinkPriceFeed",
   ClearingHouse = "src/ClearingHouse.sol:ClearingHouse",
   ClearingHouseViewer = "src/ClearingHouseViewer.sol:ClearingHouseViewer",
   Amm = "src/Amm.sol:Amm",

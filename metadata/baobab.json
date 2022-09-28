@@ -22,31 +22,35 @@
       "contracts": {
         "InsuranceFund": {
           "name": "InsuranceFund",
-          "address": "0x5694B13F65EAc136989cFeE703Bf922fE8B5278a"
+          "address": "0x8c71F2d1cCf3677Db37117A9031927c78C480E18"
         },
         "ClearingHouse": {
           "name": "ClearingHouse",
-          "address": "0xA2c20117683b9b2A867cb7B51c2432c08b7C7FC2"
+          "address": "0xA9C939480A154d5633E4E520c7e53C67198DD2dc"
         },
         "ClearingHouseViewer": {
           "name": "ClearingHouseViewer",
-          "address": "0x8B17fa902Ea444927DAC6cDa5220C4bEe4707B5D"
+          "address": "0x5295ea56E38FDa01d7cd65841B67e47dEc9FDb3d"
         },
         "AmmReader": {
           "name": "AmmReader",
-          "address": "0x91cE01225764f02ca543fc99BE825d26B91dCCc5"
-        },
-        "Chainlink": {
-          "name": "Chainlink",
-          "address": "0x1929Efed2a2299718123e0151bC5D3b73ABa97a5"
+          "address": "0xa6247cA9e02De28B6138a052bb4c16a78fAd631f"
         },
         "AAPLKDAI": {
           "name": "Amm",
-          "address": "0x21f98596D0bb9da7fFcA2a3e29d47FcEA858e79B"
+          "address": "0x339EdE517f4579dDE6B79ad356EA7bb9DcF9d1eC"
         },
         "AMDKDAI": {
           "name": "Amm",
-          "address": "0xA7675BDD2f6029e43F7EbB345da77B3deaf2B2cF"
+          "address": "0x0B77f0b48c4fE204E497c8993e0Ff72C85c9C7f1"
+        },
+        "ChainlinkPriceFeed": {
+          "name": "ChainlinkPriceFeed",
+          "address": "0xdf81EE8A8077f22aE1037dEd511672D24cC7aA41"
+        },
+        "SHOPKDAI": {
+          "name": "Amm",
+          "address": "0xBF01142FA45E5aC376F955b62F059D585ab42e65"
         }
       },
       "accounts": [],
@@ -58,9 +62,10 @@
         "arbitrageur": "0x3CC65Fc53C0f6B0fF70dee20cCda03B88BeA67c3",
         "proxyAdmin": "0x3CC65Fc53C0f6B0fF70dee20cCda03B88BeA67c3",
         "referral": "0x30F693708fc604A57F1958E3CFa059F902e6d4CB",
-        "chainlinkOracle": "0x30F693708fc604A57F1958E3CFa059F902e6d4CB",
+        "chainlinkOracle": "0xdD2089d180bcCb32F7538E9261DBcb872984Fe85",
         "aaplOracle": "0xf3CD5A5a6bcC3D1Db11191ab121fE9022013F22f",
         "amdOracle": "0x04Bc70Bf89eF7af019fc2bFD0f1e7b2B0Fd25788",
+        "shopOracle": "0x7139253904869CBAFDf384c133cd8e1c43A43636",
         "kdai": "0x6BaF15727bCABBB6765d7e35866f14256C638BDc"
       }
     }

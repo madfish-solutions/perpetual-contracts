@@ -1,9 +1,9 @@
 {
   "manifestVersion": "3.1",
   "impls": {
-    "9d0eabb6840ce87f896d6aa4b64287b7736993922b6905a9d02ae83a510b3bc0": {
-      "address": "0x3B763dC7e575F4b950ee32DAc4a15a0b23339180",
-      "txHash": "0xac53153b573d508ff295dd85a79e20e152654afbd86d05164f33d3729fa27643",
+    "2ab98567cbf43ac1c7db5ba17c2cd22a490aaa4357bfc903d77f784b530361e6": {
+      "address": "0x0B0750A5989ee6558BFb46A01307499b4cfDb3bE",
+      "txHash": "0x027452368a391e9abc9d9e9b0042ae8f78d709bfa7ee7d48b444f51b58d44d6b",
       "layout": {
         "storage": [
           {
@@ -55,40 +55,28 @@
             "src": "src/utils/BlockContext.sol:13"
           },
           {
-            "contract": "Chainlink",
+            "contract": "ChainlinkPriceFeed",
             "label": "priceFeedMap",
             "type": "t_mapping(t_bytes32,t_contract(AggregatorV3Interface)45)",
-            "src": "src/Chainlink.sol:27"
+            "src": "src/ChainlinkPriceFeed.sol:21"
           },
           {
-            "contract": "Chainlink",
+            "contract": "ChainlinkPriceFeed",
             "label": "priceFeedKeys",
             "type": "t_array(t_bytes32)dyn_storage",
-            "src": "src/Chainlink.sol:28"
+            "src": "src/ChainlinkPriceFeed.sol:22"
           },
           {
-            "contract": "Chainlink",
-            "label": "priceFeedAddress",
-            "type": "t_address",
-            "src": "src/Chainlink.sol:29"
+            "contract": "ChainlinkPriceFeed",
+            "label": "priceFeedDecimalMap",
+            "type": "t_mapping(t_bytes32,t_uint8)",
+            "src": "src/ChainlinkPriceFeed.sol:23"
           },
           {
-            "contract": "Chainlink",
-            "label": "prevTimestampMap",
-            "type": "t_mapping(t_bytes32,t_uint256)",
-            "src": "src/Chainlink.sol:30"
-          },
-          {
-            "contract": "Chainlink",
-            "label": "priceMap",
-            "type": "t_mapping(t_bytes32,t_struct(PriceFeed)5484_storage)",
-            "src": "src/Chainlink.sol:41"
-          },
-          {
-            "contract": "Chainlink",
+            "contract": "ChainlinkPriceFeed",
             "label": "__gap",
             "type": "t_array(t_uint256)50_storage",
-            "src": "src/Chainlink.sol:56"
+            "src": "src/ChainlinkPriceFeed.sol:37"
           }
         ],
         "types": {
@@ -104,53 +92,336 @@
           "t_array(t_bytes32)dyn_storage": {
             "label": "bytes32[]"
           },
-          "t_address": {
-            "label": "address"
+          "t_mapping(t_bytes32,t_uint8)": {
+            "label": "mapping(bytes32 => uint8)"
           },
-          "t_mapping(t_bytes32,t_uint256)": {
-            "label": "mapping(bytes32 => uint256)"
+          "t_uint8": {
+            "label": "uint8"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]"
           },
           "t_uint256": {
             "label": "uint256"
           },
-          "t_mapping(t_bytes32,t_struct(PriceFeed)5484_storage)": {
-            "label": "mapping(bytes32 => struct Chainlink.PriceFeed)"
-          },
-          "t_struct(PriceFeed)5484_storage": {
-            "label": "struct Chainlink.PriceFeed",
-            "members": [
-              {
-                "label": "registered",
-                "type": "t_bool"
-              },
-              {
-                "label": "priceData",
-                "type": "t_array(t_struct(PriceData)5478_storage)dyn_storage"
-              }
-            ]
+          "t_address": {
+            "label": "address"
           },
           "t_bool": {
             "label": "bool"
+          }
+        }
+      }
+    },
+    "6e2dd07b963092f31c0058a4443a89268237e91f7969f8161ca7fe73b31b880a": {
+      "address": "0x40ED5dc9B335b71f3D924579f06fc43A7A8f5c9a",
+      "txHash": "0x8fb3e1f658e3fdbf33ac09cb4452db05c714da877ae4d13533ab92d52fdf78fe",
+      "layout": {
+        "storage": [
+          {
+            "contract": "Initializable",
+            "label": "initialized",
+            "type": "t_bool",
+            "src": "@openzeppelin/contracts-ethereum-package/contracts/Initializable.sol:21"
           },
-          "t_array(t_struct(PriceData)5478_storage)dyn_storage": {
-            "label": "struct Chainlink.PriceData[]"
+          {
+            "contract": "Initializable",
+            "label": "initializing",
+            "type": "t_bool",
+            "src": "@openzeppelin/contracts-ethereum-package/contracts/Initializable.sol:26"
           },
-          "t_struct(PriceData)5478_storage": {
-            "label": "struct Chainlink.PriceData",
+          {
+            "contract": "Initializable",
+            "label": "______gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "@openzeppelin/contracts-ethereum-package/contracts/Initializable.sol:61"
+          },
+          {
+            "contract": "ContextUpgradeSafe",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "@openzeppelin/contracts-ethereum-package/contracts/GSN/Context.sol:37"
+          },
+          {
+            "contract": "PerpFiOwnableUpgrade",
+            "label": "_owner",
+            "type": "t_address",
+            "src": "src/utils/PerpFiOwnableUpgrade.sol:20"
+          },
+          {
+            "contract": "PerpFiOwnableUpgrade",
+            "label": "_candidate",
+            "type": "t_address",
+            "src": "src/utils/PerpFiOwnableUpgrade.sol:21"
+          },
+          {
+            "contract": "PerpFiOwnableUpgrade",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "src/utils/PerpFiOwnableUpgrade.sol:95"
+          },
+          {
+            "contract": "BlockContext",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "src/utils/BlockContext.sol:13"
+          },
+          {
+            "contract": "Amm",
+            "label": "baseAssetDeltaThisFundingPeriod",
+            "type": "t_struct(signedDecimal)17500_storage",
+            "src": "src/Amm.sol:97"
+          },
+          {
+            "contract": "Amm",
+            "label": "totalPositionSize",
+            "type": "t_struct(signedDecimal)17500_storage",
+            "src": "src/Amm.sol:100"
+          },
+          {
+            "contract": "Amm",
+            "label": "fundingRate",
+            "type": "t_struct(signedDecimal)17500_storage",
+            "src": "src/Amm.sol:103"
+          },
+          {
+            "contract": "Amm",
+            "label": "cumulativeNotional",
+            "type": "t_struct(signedDecimal)17500_storage",
+            "src": "src/Amm.sol:105"
+          },
+          {
+            "contract": "Amm",
+            "label": "settlementPrice",
+            "type": "t_struct(decimal)16035_storage",
+            "src": "src/Amm.sol:107"
+          },
+          {
+            "contract": "Amm",
+            "label": "tradeLimitRatio",
+            "type": "t_struct(decimal)16035_storage",
+            "src": "src/Amm.sol:108"
+          },
+          {
+            "contract": "Amm",
+            "label": "quoteAssetReserve",
+            "type": "t_struct(decimal)16035_storage",
+            "src": "src/Amm.sol:109"
+          },
+          {
+            "contract": "Amm",
+            "label": "baseAssetReserve",
+            "type": "t_struct(decimal)16035_storage",
+            "src": "src/Amm.sol:110"
+          },
+          {
+            "contract": "Amm",
+            "label": "fluctuationLimitRatio",
+            "type": "t_struct(decimal)16035_storage",
+            "src": "src/Amm.sol:111"
+          },
+          {
+            "contract": "Amm",
+            "label": "tollRatio",
+            "type": "t_struct(decimal)16035_storage",
+            "src": "src/Amm.sol:114"
+          },
+          {
+            "contract": "Amm",
+            "label": "spreadRatio",
+            "type": "t_struct(decimal)16035_storage",
+            "src": "src/Amm.sol:115"
+          },
+          {
+            "contract": "Amm",
+            "label": "tollAmount",
+            "type": "t_struct(decimal)16035_storage",
+            "src": "src/Amm.sol:116"
+          },
+          {
+            "contract": "Amm",
+            "label": "maxHoldingBaseAsset",
+            "type": "t_struct(decimal)16035_storage",
+            "src": "src/Amm.sol:117"
+          },
+          {
+            "contract": "Amm",
+            "label": "openInterestNotionalCap",
+            "type": "t_struct(decimal)16035_storage",
+            "src": "src/Amm.sol:118"
+          },
+          {
+            "contract": "Amm",
+            "label": "cumulativePositionMultiplier",
+            "type": "t_struct(decimal)16035_storage",
+            "src": "src/Amm.sol:121"
+          },
+          {
+            "contract": "Amm",
+            "label": "liquidityChangedSnapshots",
+            "type": "t_array(t_struct(LiquidityChangedSnapshot)12630_storage)dyn_storage",
+            "src": "src/Amm.sol:124"
+          },
+          {
+            "contract": "Amm",
+            "label": "spotPriceTwapInterval",
+            "type": "t_uint256",
+            "src": "src/Amm.sol:126"
+          },
+          {
+            "contract": "Amm",
+            "label": "fundingPeriod",
+            "type": "t_uint256",
+            "src": "src/Amm.sol:127"
+          },
+          {
+            "contract": "Amm",
+            "label": "fundingBufferPeriod",
+            "type": "t_uint256",
+            "src": "src/Amm.sol:128"
+          },
+          {
+            "contract": "Amm",
+            "label": "nextFundingTime",
+            "type": "t_uint256",
+            "src": "src/Amm.sol:129"
+          },
+          {
+            "contract": "Amm",
+            "label": "priceFeedKey",
+            "type": "t_bytes32",
+            "src": "src/Amm.sol:130"
+          },
+          {
+            "contract": "Amm",
+            "label": "reserveSnapshots",
+            "type": "t_array(t_struct(ReserveSnapshot)2625_storage)dyn_storage",
+            "src": "src/Amm.sol:131"
+          },
+          {
+            "contract": "Amm",
+            "label": "counterParty",
+            "type": "t_address",
+            "src": "src/Amm.sol:133"
+          },
+          {
+            "contract": "Amm",
+            "label": "globalShutdown",
+            "type": "t_address",
+            "src": "src/Amm.sol:134"
+          },
+          {
+            "contract": "Amm",
+            "label": "quoteAsset",
+            "type": "t_contract(IERC20)1878",
+            "src": "src/Amm.sol:135"
+          },
+          {
+            "contract": "Amm",
+            "label": "priceFeed",
+            "type": "t_contract(IPriceFeed)13132",
+            "src": "src/Amm.sol:136"
+          },
+          {
+            "contract": "Amm",
+            "label": "open",
+            "type": "t_bool",
+            "src": "src/Amm.sol:137"
+          },
+          {
+            "contract": "Amm",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "src/Amm.sol:138"
+          }
+        ],
+        "types": {
+          "t_struct(signedDecimal)17500_storage": {
+            "label": "struct SignedDecimal.signedDecimal",
             "members": [
               {
-                "label": "roundId",
+                "label": "d",
+                "type": "t_int256"
+              }
+            ]
+          },
+          "t_int256": {
+            "label": "int256"
+          },
+          "t_struct(decimal)16035_storage": {
+            "label": "struct Decimal.decimal",
+            "members": [
+              {
+                "label": "d",
                 "type": "t_uint256"
+              }
+            ]
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_array(t_struct(LiquidityChangedSnapshot)12630_storage)dyn_storage": {
+            "label": "struct IAmm.LiquidityChangedSnapshot[]"
+          },
+          "t_struct(LiquidityChangedSnapshot)12630_storage": {
+            "label": "struct IAmm.LiquidityChangedSnapshot",
+            "members": [
+              {
+                "label": "cumulativeNotional",
+                "type": "t_struct(signedDecimal)17500_storage"
               },
               {
-                "label": "price",
-                "type": "t_uint256"
+                "label": "quoteAssetReserve",
+                "type": "t_struct(decimal)16035_storage"
+              },
+              {
+                "label": "baseAssetReserve",
+                "type": "t_struct(decimal)16035_storage"
+              },
+              {
+                "label": "totalPositionSize",
+                "type": "t_struct(signedDecimal)17500_storage"
+              }
+            ]
+          },
+          "t_bytes32": {
+            "label": "bytes32"
+          },
+          "t_array(t_struct(ReserveSnapshot)2625_storage)dyn_storage": {
+            "label": "struct Amm.ReserveSnapshot[]"
+          },
+          "t_struct(ReserveSnapshot)2625_storage": {
+            "label": "struct Amm.ReserveSnapshot",
+            "members": [
+              {
+                "label": "quoteAssetReserve",
+                "type": "t_struct(decimal)16035_storage"
+              },
+              {
+                "label": "baseAssetReserve",
+                "type": "t_struct(decimal)16035_storage"
               },
               {
                 "label": "timestamp",
                 "type": "t_uint256"
+              },
+              {
+                "label": "blockNumber",
+                "type": "t_uint256"
               }
             ]
+          },
+          "t_address": {
+            "label": "address"
+          },
+          "t_contract(IERC20)1878": {
+            "label": "contract IERC20"
+          },
+          "t_contract(IPriceFeed)13132": {
+            "label": "contract IPriceFeed"
+          },
+          "t_bool": {
+            "label": "bool"
           },
           "t_array(t_uint256)50_storage": {
             "label": "uint256[50]"
@@ -159,8 +430,8 @@
       }
     },
     "4aa20994b05f9e7bc088174624dc0b6cfb0559b893b0f51cc5c7a3be6a11cfa7": {
-      "address": "0x1377Fb31cb1Aff00982b0506CBCD6757284Ce2D2",
-      "txHash": "0x034a5622ccf60c3911dd0b04ccde7f3567832775f03059691143c2eb1bcb1592",
+      "address": "0x4B65386aFe632723bD2Bf9b8d42E3887ed3231fb",
+      "txHash": "0x4e4744c7dcc1b9d10140f0d4cec4f0476d66b611e133e2b956d20725cb95ca7c",
       "layout": {
         "storage": [
           {
@@ -250,7 +521,7 @@
           {
             "contract": "InsuranceFund",
             "label": "amms",
-            "type": "t_array(t_contract(IAmm)13447)dyn_storage",
+            "type": "t_array(t_contract(IAmm)12821)dyn_storage",
             "src": "src/InsuranceFund.sol:39"
           },
           {
@@ -262,7 +533,7 @@
           {
             "contract": "InsuranceFund",
             "label": "exchange",
-            "type": "t_contract(IExchangeWrapper)13611",
+            "type": "t_contract(IExchangeWrapper)12985",
             "src": "src/InsuranceFund.sol:43"
           },
           {
@@ -274,13 +545,13 @@
           {
             "contract": "InsuranceFund",
             "label": "minter",
-            "type": "t_contract(IMinter)13678",
+            "type": "t_contract(IMinter)13052",
             "src": "src/InsuranceFund.sol:45"
           },
           {
             "contract": "InsuranceFund",
             "label": "inflationMonitor",
-            "type": "t_contract(IInflationMonitor)13627",
+            "type": "t_contract(IInflationMonitor)13001",
             "src": "src/InsuranceFund.sol:46"
           },
           {
@@ -306,10 +577,10 @@
           "t_bool": {
             "label": "bool"
           },
-          "t_array(t_contract(IAmm)13447)dyn_storage": {
+          "t_array(t_contract(IAmm)12821)dyn_storage": {
             "label": "contract IAmm[]"
           },
-          "t_contract(IAmm)13447": {
+          "t_contract(IAmm)12821": {
             "label": "contract IAmm"
           },
           "t_array(t_contract(IERC20)1878)dyn_storage": {
@@ -318,13 +589,13 @@
           "t_contract(IERC20)1878": {
             "label": "contract IERC20"
           },
-          "t_contract(IExchangeWrapper)13611": {
+          "t_contract(IExchangeWrapper)12985": {
             "label": "contract IExchangeWrapper"
           },
-          "t_contract(IMinter)13678": {
+          "t_contract(IMinter)13052": {
             "label": "contract IMinter"
           },
-          "t_contract(IInflationMonitor)13627": {
+          "t_contract(IInflationMonitor)13001": {
             "label": "contract IInflationMonitor"
           },
           "t_array(t_uint256)50_storage": {
@@ -343,8 +614,8 @@
       }
     },
     "1bb3aa0bfe6390e28978b8edb1f5dde498fe022360a9ff06395f6f92752879cb": {
-      "address": "0xfceD122b574833f114b55185585DFDe4806C436B",
-      "txHash": "0xdd33a4175e3477ffa2795112474a942e749d56b6ad1298a4600c65e3cbe7f8b3",
+      "address": "0x1C7794F80Ea6bD5EBFd8A5f2C4A91Ee13193D7F2",
+      "txHash": "0x12cde9f0e587d6f5a2485a8a1f1f431568a92048ae3b23a24b9908ce6254d220",
       "layout": {
         "storage": [
           {
@@ -452,49 +723,49 @@
           {
             "contract": "ClearingHouse",
             "label": "initMarginRatio",
-            "type": "t_struct(decimal)17034_storage",
+            "type": "t_struct(decimal)16035_storage",
             "src": "src/ClearingHouse.sol:169"
           },
           {
             "contract": "ClearingHouse",
             "label": "maintenanceMarginRatio",
-            "type": "t_struct(decimal)17034_storage",
+            "type": "t_struct(decimal)16035_storage",
             "src": "src/ClearingHouse.sol:172"
           },
           {
             "contract": "ClearingHouse",
             "label": "liquidationFeeRatio",
-            "type": "t_struct(decimal)17034_storage",
+            "type": "t_struct(decimal)16035_storage",
             "src": "src/ClearingHouse.sol:175"
           },
           {
             "contract": "ClearingHouse",
             "label": "openInterestNotionalMap",
-            "type": "t_mapping(t_address,t_struct(decimal)17034_storage)",
+            "type": "t_mapping(t_address,t_struct(decimal)16035_storage)",
             "src": "src/ClearingHouse.sol:179"
           },
           {
             "contract": "ClearingHouse",
             "label": "ammMap",
-            "type": "t_mapping(t_address,t_struct(AmmMap)6839_storage)",
+            "type": "t_mapping(t_address,t_struct(AmmMap)6213_storage)",
             "src": "src/ClearingHouse.sol:182"
           },
           {
             "contract": "ClearingHouse",
             "label": "prepaidBadDebt",
-            "type": "t_mapping(t_address,t_struct(decimal)17034_storage)",
+            "type": "t_mapping(t_address,t_struct(decimal)16035_storage)",
             "src": "src/ClearingHouse.sol:185"
           },
           {
             "contract": "ClearingHouse",
             "label": "insuranceFund",
-            "type": "t_contract(IInsuranceFund)13657",
+            "type": "t_contract(IInsuranceFund)13031",
             "src": "src/ClearingHouse.sol:188"
           },
           {
             "contract": "ClearingHouse",
             "label": "feePool",
-            "type": "t_contract(IMultiTokenRewardRecipient)13693",
+            "type": "t_contract(IMultiTokenRewardRecipient)13067",
             "src": "src/ClearingHouse.sol:189"
           },
           {
@@ -512,7 +783,7 @@
           {
             "contract": "ClearingHouse",
             "label": "partialLiquidationRatio",
-            "type": "t_struct(decimal)17034_storage",
+            "type": "t_struct(decimal)16035_storage",
             "src": "src/ClearingHouse.sol:202"
           },
           {
@@ -526,7 +797,7 @@
           "t_string_storage": {
             "label": "string"
           },
-          "t_struct(decimal)17034_storage": {
+          "t_struct(decimal)16035_storage": {
             "label": "struct Decimal.decimal",
             "members": [
               {
@@ -538,16 +809,16 @@
           "t_uint256": {
             "label": "uint256"
           },
-          "t_mapping(t_address,t_struct(decimal)17034_storage)": {
+          "t_mapping(t_address,t_struct(decimal)16035_storage)": {
             "label": "mapping(address => struct Decimal.decimal)"
           },
           "t_address": {
             "label": "address"
           },
-          "t_mapping(t_address,t_struct(AmmMap)6839_storage)": {
+          "t_mapping(t_address,t_struct(AmmMap)6213_storage)": {
             "label": "mapping(address => struct ClearingHouse.AmmMap)"
           },
-          "t_struct(AmmMap)6839_storage": {
+          "t_struct(AmmMap)6213_storage": {
             "label": "struct ClearingHouse.AmmMap",
             "members": [
               {
@@ -556,18 +827,18 @@
               },
               {
                 "label": "cumulativePremiumFractions",
-                "type": "t_array(t_struct(signedDecimal)18499_storage)dyn_storage"
+                "type": "t_array(t_struct(signedDecimal)17500_storage)dyn_storage"
               },
               {
                 "label": "positionMap",
-                "type": "t_mapping(t_address,t_struct(Position)6812_storage)"
+                "type": "t_mapping(t_address,t_struct(Position)6186_storage)"
               }
             ]
           },
-          "t_array(t_struct(signedDecimal)18499_storage)dyn_storage": {
+          "t_array(t_struct(signedDecimal)17500_storage)dyn_storage": {
             "label": "struct SignedDecimal.signedDecimal[]"
           },
-          "t_struct(signedDecimal)18499_storage": {
+          "t_struct(signedDecimal)17500_storage": {
             "label": "struct SignedDecimal.signedDecimal",
             "members": [
               {
@@ -576,27 +847,27 @@
               }
             ]
           },
-          "t_mapping(t_address,t_struct(Position)6812_storage)": {
+          "t_mapping(t_address,t_struct(Position)6186_storage)": {
             "label": "mapping(address => struct ClearingHouse.Position)"
           },
-          "t_struct(Position)6812_storage": {
+          "t_struct(Position)6186_storage": {
             "label": "struct ClearingHouse.Position",
             "members": [
               {
                 "label": "size",
-                "type": "t_struct(signedDecimal)18499_storage"
+                "type": "t_struct(signedDecimal)17500_storage"
               },
               {
                 "label": "margin",
-                "type": "t_struct(decimal)17034_storage"
+                "type": "t_struct(decimal)16035_storage"
               },
               {
                 "label": "openNotional",
-                "type": "t_struct(decimal)17034_storage"
+                "type": "t_struct(decimal)16035_storage"
               },
               {
                 "label": "lastUpdatedCumulativePremiumFraction",
-                "type": "t_struct(signedDecimal)18499_storage"
+                "type": "t_struct(signedDecimal)17500_storage"
               },
               {
                 "label": "liquidityHistoryIndex",
@@ -611,10 +882,10 @@
           "t_int256": {
             "label": "int256"
           },
-          "t_contract(IInsuranceFund)13657": {
+          "t_contract(IInsuranceFund)13031": {
             "label": "contract IInsuranceFund"
           },
-          "t_contract(IMultiTokenRewardRecipient)13693": {
+          "t_contract(IMultiTokenRewardRecipient)13067": {
             "label": "contract IMultiTokenRewardRecipient"
           },
           "t_array(t_uint256)50_storage": {
@@ -634,326 +905,10 @@
           }
         }
       }
-    },
-    "83c986e69d9b0d1d97111e33b291c9dcdc37a095d82963fdc2debcf507130e3a": {
-      "address": "0x20B42B6eD1f09482Ac1B4039Eb91f41c14502D6b",
-      "txHash": "0xeae6ec448a86909664aab90c5f286a334738e2354ace6b6d9e6e8c3dcef89feb",
-      "layout": {
-        "storage": [
-          {
-            "contract": "Initializable",
-            "label": "initialized",
-            "type": "t_bool",
-            "src": "@openzeppelin/contracts-ethereum-package/contracts/Initializable.sol:21"
-          },
-          {
-            "contract": "Initializable",
-            "label": "initializing",
-            "type": "t_bool",
-            "src": "@openzeppelin/contracts-ethereum-package/contracts/Initializable.sol:26"
-          },
-          {
-            "contract": "Initializable",
-            "label": "______gap",
-            "type": "t_array(t_uint256)50_storage",
-            "src": "@openzeppelin/contracts-ethereum-package/contracts/Initializable.sol:61"
-          },
-          {
-            "contract": "ContextUpgradeSafe",
-            "label": "__gap",
-            "type": "t_array(t_uint256)50_storage",
-            "src": "@openzeppelin/contracts-ethereum-package/contracts/GSN/Context.sol:37"
-          },
-          {
-            "contract": "PerpFiOwnableUpgrade",
-            "label": "_owner",
-            "type": "t_address",
-            "src": "src/utils/PerpFiOwnableUpgrade.sol:20"
-          },
-          {
-            "contract": "PerpFiOwnableUpgrade",
-            "label": "_candidate",
-            "type": "t_address",
-            "src": "src/utils/PerpFiOwnableUpgrade.sol:21"
-          },
-          {
-            "contract": "PerpFiOwnableUpgrade",
-            "label": "__gap",
-            "type": "t_array(t_uint256)50_storage",
-            "src": "src/utils/PerpFiOwnableUpgrade.sol:95"
-          },
-          {
-            "contract": "BlockContext",
-            "label": "__gap",
-            "type": "t_array(t_uint256)50_storage",
-            "src": "src/utils/BlockContext.sol:13"
-          },
-          {
-            "contract": "Amm",
-            "label": "baseAssetDeltaThisFundingPeriod",
-            "type": "t_struct(signedDecimal)18499_storage",
-            "src": "src/Amm.sol:97"
-          },
-          {
-            "contract": "Amm",
-            "label": "totalPositionSize",
-            "type": "t_struct(signedDecimal)18499_storage",
-            "src": "src/Amm.sol:100"
-          },
-          {
-            "contract": "Amm",
-            "label": "fundingRate",
-            "type": "t_struct(signedDecimal)18499_storage",
-            "src": "src/Amm.sol:103"
-          },
-          {
-            "contract": "Amm",
-            "label": "cumulativeNotional",
-            "type": "t_struct(signedDecimal)18499_storage",
-            "src": "src/Amm.sol:105"
-          },
-          {
-            "contract": "Amm",
-            "label": "settlementPrice",
-            "type": "t_struct(decimal)17034_storage",
-            "src": "src/Amm.sol:107"
-          },
-          {
-            "contract": "Amm",
-            "label": "tradeLimitRatio",
-            "type": "t_struct(decimal)17034_storage",
-            "src": "src/Amm.sol:108"
-          },
-          {
-            "contract": "Amm",
-            "label": "quoteAssetReserve",
-            "type": "t_struct(decimal)17034_storage",
-            "src": "src/Amm.sol:109"
-          },
-          {
-            "contract": "Amm",
-            "label": "baseAssetReserve",
-            "type": "t_struct(decimal)17034_storage",
-            "src": "src/Amm.sol:110"
-          },
-          {
-            "contract": "Amm",
-            "label": "fluctuationLimitRatio",
-            "type": "t_struct(decimal)17034_storage",
-            "src": "src/Amm.sol:111"
-          },
-          {
-            "contract": "Amm",
-            "label": "tollRatio",
-            "type": "t_struct(decimal)17034_storage",
-            "src": "src/Amm.sol:114"
-          },
-          {
-            "contract": "Amm",
-            "label": "spreadRatio",
-            "type": "t_struct(decimal)17034_storage",
-            "src": "src/Amm.sol:115"
-          },
-          {
-            "contract": "Amm",
-            "label": "tollAmount",
-            "type": "t_struct(decimal)17034_storage",
-            "src": "src/Amm.sol:116"
-          },
-          {
-            "contract": "Amm",
-            "label": "maxHoldingBaseAsset",
-            "type": "t_struct(decimal)17034_storage",
-            "src": "src/Amm.sol:117"
-          },
-          {
-            "contract": "Amm",
-            "label": "openInterestNotionalCap",
-            "type": "t_struct(decimal)17034_storage",
-            "src": "src/Amm.sol:118"
-          },
-          {
-            "contract": "Amm",
-            "label": "cumulativePositionMultiplier",
-            "type": "t_struct(decimal)17034_storage",
-            "src": "src/Amm.sol:121"
-          },
-          {
-            "contract": "Amm",
-            "label": "liquidityChangedSnapshots",
-            "type": "t_array(t_struct(LiquidityChangedSnapshot)13256_storage)dyn_storage",
-            "src": "src/Amm.sol:124"
-          },
-          {
-            "contract": "Amm",
-            "label": "spotPriceTwapInterval",
-            "type": "t_uint256",
-            "src": "src/Amm.sol:126"
-          },
-          {
-            "contract": "Amm",
-            "label": "fundingPeriod",
-            "type": "t_uint256",
-            "src": "src/Amm.sol:127"
-          },
-          {
-            "contract": "Amm",
-            "label": "fundingBufferPeriod",
-            "type": "t_uint256",
-            "src": "src/Amm.sol:128"
-          },
-          {
-            "contract": "Amm",
-            "label": "nextFundingTime",
-            "type": "t_uint256",
-            "src": "src/Amm.sol:129"
-          },
-          {
-            "contract": "Amm",
-            "label": "priceFeedKey",
-            "type": "t_bytes32",
-            "src": "src/Amm.sol:130"
-          },
-          {
-            "contract": "Amm",
-            "label": "reserveSnapshots",
-            "type": "t_array(t_struct(ReserveSnapshot)2757_storage)dyn_storage",
-            "src": "src/Amm.sol:131"
-          },
-          {
-            "contract": "Amm",
-            "label": "counterParty",
-            "type": "t_address",
-            "src": "src/Amm.sol:133"
-          },
-          {
-            "contract": "Amm",
-            "label": "globalShutdown",
-            "type": "t_address",
-            "src": "src/Amm.sol:134"
-          },
-          {
-            "contract": "Amm",
-            "label": "quoteAsset",
-            "type": "t_contract(IERC20)1878",
-            "src": "src/Amm.sol:135"
-          },
-          {
-            "contract": "Amm",
-            "label": "priceFeed",
-            "type": "t_contract(IPriceFeed)13758",
-            "src": "src/Amm.sol:136"
-          },
-          {
-            "contract": "Amm",
-            "label": "open",
-            "type": "t_bool",
-            "src": "src/Amm.sol:137"
-          },
-          {
-            "contract": "Amm",
-            "label": "__gap",
-            "type": "t_array(t_uint256)50_storage",
-            "src": "src/Amm.sol:138"
-          }
-        ],
-        "types": {
-          "t_struct(signedDecimal)18499_storage": {
-            "label": "struct SignedDecimal.signedDecimal",
-            "members": [
-              {
-                "label": "d",
-                "type": "t_int256"
-              }
-            ]
-          },
-          "t_int256": {
-            "label": "int256"
-          },
-          "t_struct(decimal)17034_storage": {
-            "label": "struct Decimal.decimal",
-            "members": [
-              {
-                "label": "d",
-                "type": "t_uint256"
-              }
-            ]
-          },
-          "t_uint256": {
-            "label": "uint256"
-          },
-          "t_array(t_struct(LiquidityChangedSnapshot)13256_storage)dyn_storage": {
-            "label": "struct IAmm.LiquidityChangedSnapshot[]"
-          },
-          "t_struct(LiquidityChangedSnapshot)13256_storage": {
-            "label": "struct IAmm.LiquidityChangedSnapshot",
-            "members": [
-              {
-                "label": "cumulativeNotional",
-                "type": "t_struct(signedDecimal)18499_storage"
-              },
-              {
-                "label": "quoteAssetReserve",
-                "type": "t_struct(decimal)17034_storage"
-              },
-              {
-                "label": "baseAssetReserve",
-                "type": "t_struct(decimal)17034_storage"
-              },
-              {
-                "label": "totalPositionSize",
-                "type": "t_struct(signedDecimal)18499_storage"
-              }
-            ]
-          },
-          "t_bytes32": {
-            "label": "bytes32"
-          },
-          "t_array(t_struct(ReserveSnapshot)2757_storage)dyn_storage": {
-            "label": "struct Amm.ReserveSnapshot[]"
-          },
-          "t_struct(ReserveSnapshot)2757_storage": {
-            "label": "struct Amm.ReserveSnapshot",
-            "members": [
-              {
-                "label": "quoteAssetReserve",
-                "type": "t_struct(decimal)17034_storage"
-              },
-              {
-                "label": "baseAssetReserve",
-                "type": "t_struct(decimal)17034_storage"
-              },
-              {
-                "label": "timestamp",
-                "type": "t_uint256"
-              },
-              {
-                "label": "blockNumber",
-                "type": "t_uint256"
-              }
-            ]
-          },
-          "t_address": {
-            "label": "address"
-          },
-          "t_contract(IERC20)1878": {
-            "label": "contract IERC20"
-          },
-          "t_contract(IPriceFeed)13758": {
-            "label": "contract IPriceFeed"
-          },
-          "t_bool": {
-            "label": "bool"
-          },
-          "t_array(t_uint256)50_storage": {
-            "label": "uint256[50]"
-          }
-        }
-      }
     }
   },
   "admin": {
-    "address": "0xd8408aEA6493472e361b51f717568A0C044a50a6",
-    "txHash": "0xfacd89ec34b2a884fbab86c01b8b1d6c94e53cfc4b0bf9037a3c3073c1ef8a61"
+    "address": "0xe68d0A8aecB1374499d7258CECBBfa4bd335BD63",
+    "txHash": "0x1a01c9b96e967a3217c450765b85c476e95be930ac8801e13d4ccf3059178851"
   }
 }

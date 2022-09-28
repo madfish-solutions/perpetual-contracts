@@ -58,6 +58,7 @@ export interface ExternalContracts {
   diodonBridge?: string;
   aaplOracle?: string;
   amdOracle?: string;
+  shopOracle?: string;
 
   // https://docs.tokenbridge.net/eth-xdai-amb-bridge/multi-token-extension#omnibridge-technical-information-and-extension-parameters
 

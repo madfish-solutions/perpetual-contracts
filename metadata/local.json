@@ -1,0 +1,396 @@
+{
+  "layers": {
+    "layer1": {
+      "contracts": {},
+      "accounts": [],
+      "network": "localhost",
+      "externalContracts": {
+        "foundationGovernance": "0xa230A4f6F38D904C2eA1eE95d8b2b8b7350e3d79",
+        "rewardGovernance": "0x9FE5f5bbbD3f2172Fa370068D26185f3d82ed9aC",
+        "diodonBridge": "0xD4075FB57fCf038bFc702c915Ef9592534bED5c1",
+        "baobabBridge": "0x30F693708fc604A57F1958E3CFa059F902e6d4CB",
+        "chainlinkOracle": "0x68dfc526037E9030c8F813D014919CC89E7d4d74",
+        "kdai": "0x68dfc526037E9030c8F813D014919CC89E7d4d74"
+      }
+    },
+    "layer2": {
+      "network": "localhost",
+      "contracts": {
+        "AggregatorV3Interface": {
+          "name": "AggregatorV3Interface",
+          "address": ""
+        },
+        "BaseRelayRecipient": {
+          "name": "BaseRelayRecipient",
+          "address": ""
+        },
+        "IRelayRecipient": {
+          "name": "IRelayRecipient",
+          "address": ""
+        },
+        "AccessControlUpgradeSafe": {
+          "name": "AccessControlUpgradeSafe",
+          "address": ""
+        },
+        "ContextUpgradeSafe": {
+          "name": "ContextUpgradeSafe",
+          "address": ""
+        },
+        "Initializable": {
+          "name": "Initializable",
+          "address": ""
+        },
+        "SafeMath": {
+          "name": "SafeMath",
+          "address": ""
+        },
+        "SignedSafeMath": {
+          "name": "SignedSafeMath",
+          "address": ""
+        },
+        "ERC20PresetMinterPauserUpgradeSafe": {
+          "name": "ERC20PresetMinterPauserUpgradeSafe",
+          "address": ""
+        },
+        "ERC20UpgradeSafe": {
+          "name": "ERC20UpgradeSafe",
+          "address": ""
+        },
+        "ERC20BurnableUpgradeSafe": {
+          "name": "ERC20BurnableUpgradeSafe",
+          "address": ""
+        },
+        "ERC20PausableUpgradeSafe": {
+          "name": "ERC20PausableUpgradeSafe",
+          "address": ""
+        },
+        "IERC20": {
+          "name": "IERC20",
+          "address": ""
+        },
+        "Address": {
+          "name": "Address",
+          "address": ""
+        },
+        "EnumerableSet": {
+          "name": "EnumerableSet",
+          "address": ""
+        },
+        "PausableUpgradeSafe": {
+          "name": "PausableUpgradeSafe",
+          "address": ""
+        },
+        "ReentrancyGuardUpgradeSafe": {
+          "name": "ReentrancyGuardUpgradeSafe",
+          "address": ""
+        },
+        "BytesLib": {
+          "name": "BytesLib",
+          "address": ""
+        },
+        "Amm": {
+          "name": "Amm",
+          "address": ""
+        },
+        "AmmReader": {
+          "name": "AmmReader",
+          "address": ""
+        },
+        "ChainlinkPriceFeed": {
+          "name": "ChainlinkPriceFeed",
+          "address": ""
+        },
+        "ClearingHouse": {
+          "name": "ClearingHouse",
+          "address": ""
+        },
+        "ClearingHouseViewer": {
+          "name": "ClearingHouseViewer",
+          "address": ""
+        },
+        "InflationMonitor": {
+          "name": "InflationMonitor",
+          "address": ""
+        },
+        "InsuranceFund": {
+          "name": "InsuranceFund",
+          "address": ""
+        },
+        "MultiSigWallet": {
+          "name": "MultiSigWallet",
+          "address": ""
+        },
+        "IAmm": {
+          "name": "IAmm",
+          "address": ""
+        },
+        "IClearingHouse": {
+          "name": "IClearingHouse",
+          "address": ""
+        },
+        "IExchangeWrapper": {
+          "name": "IExchangeWrapper",
+          "address": ""
+        },
+        "IInflationMonitor": {
+          "name": "IInflationMonitor",
+          "address": ""
+        },
+        "IInsuranceFund": {
+          "name": "IInsuranceFund",
+          "address": ""
+        },
+        "IMinter": {
+          "name": "IMinter",
+          "address": ""
+        },
+        "IMultiTokenRewardRecipient": {
+          "name": "IMultiTokenRewardRecipient",
+          "address": ""
+        },
+        "IPerpToken": {
+          "name": "IPerpToken",
+          "address": ""
+        },
+        "IPriceFeed": {
+          "name": "IPriceFeed",
+          "address": ""
+        },
+        "IRewardRecipient": {
+          "name": "IRewardRecipient",
+          "address": ""
+        },
+        "IRewardsDistribution": {
+          "name": "IRewardsDistribution",
+          "address": ""
+        },
+        "IStakeModule": {
+          "name": "IStakeModule",
+          "address": ""
+        },
+        "Minter": {
+          "name": "Minter",
+          "address": ""
+        },
+        "AmmFake": {
+          "name": "AmmFake",
+          "address": ""
+        },
+        "ChainlinkPriceFeedFake": {
+          "name": "ChainlinkPriceFeedFake",
+          "address": ""
+        },
+        "ClearingHouseFake": {
+          "name": "ClearingHouseFake",
+          "address": ""
+        },
+        "DecimalERC20Fake": {
+          "name": "DecimalERC20Fake",
+          "address": ""
+        },
+        "DecimalFake": {
+          "name": "DecimalFake",
+          "address": ""
+        },
+        "ERC20Fake": {
+          "name": "ERC20Fake",
+          "address": ""
+        },
+        "ERC20MinimalFake": {
+          "name": "ERC20MinimalFake",
+          "address": ""
+        },
+        "InflationMonitorFake": {
+          "name": "InflationMonitorFake",
+          "address": ""
+        },
+        "InsuranceFundFake": {
+          "name": "InsuranceFundFake",
+          "address": ""
+        },
+        "MixedDecimalFake": {
+          "name": "MixedDecimalFake",
+          "address": ""
+        },
+        "AMBBridgeMock": {
+          "name": "AMBBridgeMock",
+          "address": ""
+        },
+        "AmmMock": {
+          "name": "AmmMock",
+          "address": ""
+        },
+        "BalancerMock": {
+          "name": "BalancerMock",
+          "address": ""
+        },
+        "ChainlinkAggregatorMock": {
+          "name": "ChainlinkAggregatorMock",
+          "address": ""
+        },
+        "ChainlinkL1Mock": {
+          "name": "ChainlinkL1Mock",
+          "address": ""
+        },
+        "ClearingHouseMock": {
+          "name": "ClearingHouseMock",
+          "address": ""
+        },
+        "CUsdtMock": {
+          "name": "CUsdtMock",
+          "address": ""
+        },
+        "ExchangeWrapperMock": {
+          "name": "ExchangeWrapperMock",
+          "address": ""
+        },
+        "L2PriceFeedMock": {
+          "name": "L2PriceFeedMock",
+          "address": ""
+        },
+        "MetaTxRecipientMock": {
+          "name": "MetaTxRecipientMock",
+          "address": ""
+        },
+        "MultiTokenMediatorMock": {
+          "name": "MultiTokenMediatorMock",
+          "address": ""
+        },
+        "PerpTokenMock": {
+          "name": "PerpTokenMock",
+          "address": ""
+        },
+        "PriceFeedMock": {
+          "name": "PriceFeedMock",
+          "address": ""
+        },
+        "StakedPerpTokenMock": {
+          "name": "StakedPerpTokenMock",
+          "address": ""
+        },
+        "PerpFiOwnableUpgradeFake": {
+          "name": "PerpFiOwnableUpgradeFake",
+          "address": ""
+        },
+        "SignedDecimalFake": {
+          "name": "SignedDecimalFake",
+          "address": ""
+        },
+        "SupplyScheduleFake": {
+          "name": "SupplyScheduleFake",
+          "address": ""
+        },
+        "BasicToken": {
+          "name": "BasicToken",
+          "address": ""
+        },
+        "BlackList": {
+          "name": "BlackList",
+          "address": ""
+        },
+        "ERC20": {
+          "name": "ERC20",
+          "address": ""
+        },
+        "ERC20Basic": {
+          "name": "ERC20Basic",
+          "address": ""
+        },
+        "Ownable": {
+          "name": "Ownable",
+          "address": ""
+        },
+        "Pausable": {
+          "name": "Pausable",
+          "address": ""
+        },
+        "StandardToken": {
+          "name": "StandardToken",
+          "address": ""
+        },
+        "TokenMock": {
+          "name": "TokenMock",
+          "address": ""
+        },
+        "UpgradedStandardToken": {
+          "name": "UpgradedStandardToken",
+          "address": ""
+        },
+        "TraderWallet": {
+          "name": "TraderWallet",
+          "address": ""
+        },
+        "UpgradableContractV1": {
+          "name": "UpgradableContractV1",
+          "address": ""
+        },
+        "UpgradableContractV2": {
+          "name": "UpgradableContractV2",
+          "address": ""
+        },
+        "OwnerPausableUpgradeSafe": {
+          "name": "OwnerPausableUpgradeSafe",
+          "address": ""
+        },
+        "RewardsDistribution": {
+          "name": "RewardsDistribution",
+          "address": ""
+        },
+        "RewardsDistributionRecipient": {
+          "name": "RewardsDistributionRecipient",
+          "address": ""
+        },
+        "SupplySchedule": {
+          "name": "SupplySchedule",
+          "address": ""
+        },
+        "AddressArray": {
+          "name": "AddressArray",
+          "address": ""
+        },
+        "BlockContext": {
+          "name": "BlockContext",
+          "address": ""
+        },
+        "Decimal": {
+          "name": "Decimal",
+          "address": ""
+        },
+        "DecimalERC20": {
+          "name": "DecimalERC20",
+          "address": ""
+        },
+        "DecimalMath": {
+          "name": "DecimalMath",
+          "address": ""
+        },
+        "ERC20ViewOnly": {
+          "name": "ERC20ViewOnly",
+          "address": ""
+        },
+        "LowLevelErrorMessage": {
+          "name": "LowLevelErrorMessage",
+          "address": ""
+        },
+        "MixedDecimal": {
+          "name": "MixedDecimal",
+          "address": ""
+        },
+        "PerpFiOwnableUpgrade": {
+          "name": "PerpFiOwnableUpgrade",
+          "address": ""
+        },
+        "SignedDecimal": {
+          "name": "SignedDecimal",
+          "address": ""
+        },
+        "SignedDecimalMath": {
+          "name": "SignedDecimalMath",
+          "address": ""
+        }
+      },
+      "accounts": [],
+      "externalContracts": {}
+    }
+  }
+}

@@ -2,7 +2,7 @@
 
 import { Layer } from "../../scripts/common"
 import {
-    AmmReader, Chainlink, ClearingHouse,
+    AmmReader, ChainlinkPriceFeed, ClearingHouse,
     ClearingHouseViewer, InsuranceFund
 } from "../../types/ethers"
 import { AmmInstanceName, ContractFullyQualifiedName } from "../ContractName"
@@ -51,8 +51,8 @@ const migration: MigrationDefinition = {
         },
         async (): Promise<void> => {
             console.log("deploy AAPLkDAI amm...")
-            const oracle = context.factory.create<Chainlink>(
-              ContractFullyQualifiedName.Chainlink,
+            const oracle = context.factory.create<ChainlinkPriceFeed>(
+              ContractFullyQualifiedName.ChainlinkPriceFeed,
             );
             const ammName = AmmInstanceName.AAPLKDAI
             const ammContract = context.factory.createAmm(ammName, ContractFullyQualifiedName.AmmV1)
@@ -65,8 +65,20 @@ const migration: MigrationDefinition = {
         },
         async (): Promise<void> => {
             console.log("deploy AMDkDAI amm...")
-            const oracle = context.factory.create<Chainlink>(ContractFullyQualifiedName.Chainlink)
+            const oracle = context.factory.create<ChainlinkPriceFeed>(ContractFullyQualifiedName.ChainlinkPriceFeed)
             const ammName = AmmInstanceName.AMDKDAI
+            const ammContract = context.factory.createAmm(ammName, ContractFullyQualifiedName.AmmV1)
+            const quoteTokenAddr = context.externalContract.kdai!
+            await ammContract.deployUpgradableContract(
+                context.deployConfig.legacyAmmConfigMap[ammName].deployArgs,
+                oracle.address!,
+                quoteTokenAddr,
+            )
+        },
+        async (): Promise<void> => {
+            console.log("deploy SHOPkDAI amm...")
+            const oracle = context.factory.create<ChainlinkPriceFeed>(ContractFullyQualifiedName.ChainlinkPriceFeed)
+            const ammName = AmmInstanceName.SHOPKDAI
             const ammContract = context.factory.createAmm(ammName, ContractFullyQualifiedName.AmmV1)
             const quoteTokenAddr = context.externalContract.kdai!
             await ammContract.deployUpgradableContract(
@@ -160,6 +172,40 @@ const migration: MigrationDefinition = {
             await (await insuranceFund.addAmm(ammContract.address!)).wait(context.deployConfig.confirmations)
         },
         async (): Promise<void> => {
+            console.log("set SHOP amm Cap...")
+            const amm = await context.factory
+                .createAmm(AmmInstanceName.SHOPKDAI, ContractFullyQualifiedName.AmmV1)
+                .instance()
+            const { maxHoldingBaseAsset, openInterestNotionalCap } = context.deployConfig.legacyAmmConfigMap[
+                AmmInstanceName.SHOPKDAI
+            ].properties
+            if (maxHoldingBaseAsset.gt(0)) {
+                await (
+                    await amm.setCap({ d: maxHoldingBaseAsset.toString() }, { d: openInterestNotionalCap.toString() })
+                ).wait(context.deployConfig.confirmations)
+            }
+
+        },
+        async (): Promise<void> => {
+            console.log("SHOP amm.setCounterParty...")
+            const clearingHouseContract = context.factory.create<ClearingHouse>(
+                ContractFullyQualifiedName.ClearingHouse,
+            )
+            const amm = await context.factory
+                .createAmm(AmmInstanceName.SHOPKDAI, ContractFullyQualifiedName.AmmV1)
+                .instance()
+            await (await amm.setCounterParty(clearingHouseContract.address!)).wait(context.deployConfig.confirmations)
+        },
+        async (): Promise<void> => {
+            console.log("insuranceFund.add SHOP amm...")
+            const insuranceFundContract = context.factory.create<InsuranceFund>(
+                ContractFullyQualifiedName.InsuranceFund,
+            )
+            const ammContract = context.factory.createAmm(AmmInstanceName.SHOPKDAI, ContractFullyQualifiedName.AmmV1)
+            const insuranceFund = await insuranceFundContract.instance()
+            await (await insuranceFund.addAmm(ammContract.address!)).wait(context.deployConfig.confirmations)
+        },
+        async (): Promise<void> => {
             console.log("opening Amm AAPLUSDC...")
             const aapleKDai = await context.factory
                 .createAmm(AmmInstanceName.AAPLKDAI, ContractFullyQualifiedName.AmmV1)
@@ -172,6 +218,13 @@ const migration: MigrationDefinition = {
                 .createAmm(AmmInstanceName.AMDKDAI, ContractFullyQualifiedName.AmmV1)
                 .instance()
             await (await amdKDai.setOpen(true)).wait(context.deployConfig.confirmations)
+        },
+        async (): Promise<void> => {
+            console.log("opening Amm SHOPKDAI...")
+            const shopKdai = await context.factory
+                .createAmm(AmmInstanceName.SHOPKDAI, ContractFullyQualifiedName.AmmV1)
+                .instance()
+            await (await shopKdai.setOpen(true)).wait(context.deployConfig.confirmations)
         },
     ],
 }
