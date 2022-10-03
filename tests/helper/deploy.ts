@@ -4,61 +4,35 @@ import {
     AmmReaderInstance,
     ClearingHouseFakeInstance,
     ClearingHouseViewerInstance,
-    ClientBridgeInstance,
     ERC20FakeInstance,
-    ExchangeWrapperMockInstance,
-    InflationMonitorFakeInstance,
-    InsuranceFundFakeInstance,
-    L2PriceFeedMockInstance,
-    MetaTxGatewayInstance,
-    MinterInstance,
-    PerpTokenInstance,
-    RewardsDistributionFakeInstance,
-    StakingReserveFakeInstance,
-    SupplyScheduleFakeInstance,
-    TollPoolInstance,
+    ExchangeWrapperMockInstance, InsuranceFundFakeInstance,
+    L2PriceFeedMockInstance, SupplyScheduleFakeInstance
 } from "../../types/truffle"
 import {
-    deployAmm,
-    deployAmmReader,
-    deployClearingHouse,
-    deployClearingHouseViewer,
-    deployClientBridge,
-    deployErc20Fake,
-    deployInflationMonitor,
-    deployInsuranceFund,
-    deployL2MockPriceFeed,
-    deployMetaTxGateway,
-    deployMinter,
-    deployMockAMBBridge,
-    deployMockExchangeWrapper,
-    deployMockMultiToken,
-    deployPerpToken,
-    deployRewardsDistribution,
-    deployStakingReserve,
-    deploySupplySchedule,
-    deployTollPool,
-} from "./contract"
+  deployAmm,
+  deployAmmReader,
+  deployClearingHouse,
+  deployClearingHouseViewer,
+  deployErc20Fake,
+  deployInsuranceFund,
+  deployL2MockPriceFeed,
+  deploySupplySchedule,
+  deployMockExchangeWrapper,
+} from "./contract";
 import { toDecimal, toFullDigit } from "./number"
 
 export interface PerpContracts {
-    metaTxGateway: MetaTxGatewayInstance
     quoteToken: ERC20FakeInstance
     priceFeed: L2PriceFeedMockInstance
-    perpToken: PerpTokenInstance
     supplySchedule: SupplyScheduleFakeInstance
-    stakingReserve: StakingReserveFakeInstance
     exchangeWrapper: ExchangeWrapperMockInstance
     insuranceFund: InsuranceFundFakeInstance
     clearingHouse: ClearingHouseFakeInstance
-    rewardsDistribution: RewardsDistributionFakeInstance
     amm: AmmFakeInstance
     ammReader: AmmReaderInstance
     clearingHouseViewer: ClearingHouseViewerInstance
-    inflationMonitor: InflationMonitorFakeInstance
-    minter: MinterInstance
-    tollPool: TollPoolInstance
-    clientBridge: ClientBridgeInstance
+    // inflationMonitor: InflationMonitorFakeInstance
+    // minter: MinterInstance
 }
 
 export interface ContractDeployArgs {
@@ -108,54 +82,31 @@ export async function fullDeploy(args: ContractDeployArgs): Promise<PerpContract
         baseAssetReserve = DEFAULT_CONTRACT_DEPLOY_ARGS.baseAssetReserve,
         startSchedule = DEFAULT_CONTRACT_DEPLOY_ARGS.startSchedule,
     } = args
-    const metaTxGateway = await deployMetaTxGateway("Perp", "1", 1234) // default hardhat evm chain ID
+
     const quoteToken = await deployErc20Fake(quoteTokenAmount, "Tether", "USDT", new BN(quoteTokenDecimals))
     const priceFeed = await deployL2MockPriceFeed(toFullDigit(100))
 
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const perpToken = await deployPerpToken(perpInitSupply!)
-    const minter = await deployMinter(perpToken.address)
-    const inflationMonitor = await deployInflationMonitor(minter.address)
-    const exchangeWrapper = await deployMockExchangeWrapper()
     const supplySchedule = await deploySupplySchedule(
-        minter.address,
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        perpInflationRate!,
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        perpDecayRate!,
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        perpMintDuration!,
-    )
-
-    const insuranceFund = await deployInsuranceFund(exchangeWrapper.address, minter.address)
+      sender,
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      perpInflationRate!,
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      perpDecayRate!,
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      perpMintDuration!,
+    );
+    const exchangeWrapper = await deployMockExchangeWrapper();
+    const insuranceFund = await deployInsuranceFund(exchangeWrapper.address, sender);
 
     const clearingHouse = await deployClearingHouse(
         toDecimal(0.05),
         toDecimal(0.05),
         toDecimal(0.05),
         insuranceFund.address,
-        metaTxGateway.address,
     )
-    await metaTxGateway.addToWhitelists(clearingHouse.address)
+    await clearingHouse.setTollPool(sender, { from: sender })
     const clearingHouseViewer = await deployClearingHouseViewer(clearingHouse.address)
-
-    const stakingReserve = await deployStakingReserve(
-        perpToken.address,
-        supplySchedule.address,
-        clearingHouse.address,
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        perpRewardVestingPeriod!,
-    )
-
-    const ambBridge = await deployMockAMBBridge()
-    const tokenMediator = await deployMockMultiToken()
-    const clientBridge = await deployClientBridge(ambBridge.address, tokenMediator.address, metaTxGateway.address)
-
-    const tollPool = await deployTollPool(clearingHouse.address, clientBridge.address)
-
-    await clearingHouse.setTollPool(tollPool.address)
-
-    const rewardsDistribution = await deployRewardsDistribution(minter.address, stakingReserve.address)
 
     // deploy an amm with Q100/B1000 liquidity
     const amm = await deployAmm({
@@ -177,38 +128,28 @@ export async function fullDeploy(args: ContractDeployArgs): Promise<PerpContract
     await amm.setGlobalShutdown(insuranceFund.address)
     await amm.setCounterParty(clearingHouse.address)
     await insuranceFund.addAmm(amm.address)
-    await stakingReserve.setRewardsDistribution(rewardsDistribution.address)
-    await insuranceFund.setBeneficiary(clearingHouse.address)
-    await insuranceFund.setInflationMonitor(inflationMonitor.address)
-    await perpToken.addMinter(minter.address)
-    await minter.setSupplySchedule(supplySchedule.address)
-    await minter.setRewardsDistribution(rewardsDistribution.address)
-    await minter.setInflationMonitor(inflationMonitor.address)
-    await minter.setInsuranceFund(insuranceFund.address)
-    await tollPool.addFeeToken(quoteToken.address)
 
-    if (startSchedule) {
-        await supplySchedule.startSchedule()
-    }
+    await insuranceFund.setBeneficiary(clearingHouse.address)
+    //await insuranceFund.setInflationMonitor(inflationMonitor.address)
+    // await perpToken.addMinter(minter.address)
+    // await minter.setSupplySchedule(supplySchedule.address)
+    // await minter.setInflationMonitor(inflationMonitor.address)
+    // await minter.setInsuranceFund(insuranceFund.address)
+
+    // if (startSchedule) {
+    //     await supplySchedule.startSchedule()
+    // }
     await amm.setOpen(true)
 
     return {
-        metaTxGateway,
         quoteToken,
         priceFeed,
-        perpToken,
-        supplySchedule,
-        stakingReserve,
-        exchangeWrapper,
         insuranceFund,
         clearingHouse,
-        rewardsDistribution,
         amm,
         ammReader,
         clearingHouseViewer,
-        inflationMonitor,
-        minter,
-        tollPool,
-        clientBridge,
+        supplySchedule,
+        exchangeWrapper
     }
 }

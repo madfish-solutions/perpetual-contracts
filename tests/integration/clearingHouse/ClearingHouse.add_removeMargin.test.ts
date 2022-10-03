@@ -9,9 +9,8 @@ import {
     ERC20FakeInstance,
     InsuranceFundFakeInstance,
     L2PriceFeedMockInstance,
-    RewardsDistributionFakeInstance,
     SupplyScheduleFakeInstance,
-    TraderWalletContract,
+    TraderWalletContract
 } from "../../../types/truffle"
 import { assertionHelper } from "../../helper/assertion-plugin"
 import { Side } from "../../helper/contract"
@@ -33,7 +32,6 @@ describe("ClearingHouse add/remove margin Test", () => {
     let insuranceFund: InsuranceFundFakeInstance
     let quoteToken: ERC20FakeInstance
     let mockPriceFeed!: L2PriceFeedMockInstance
-    let rewardsDistribution: RewardsDistributionFakeInstance
     let clearingHouse: ClearingHouseFakeInstance
     let clearingHouseViewer: ClearingHouseViewerInstance
     let supplySchedule: SupplyScheduleFakeInstance
@@ -46,7 +44,7 @@ describe("ClearingHouse add/remove margin Test", () => {
     async function forwardBlockTimestamp(time: number): Promise<void> {
         const now = await supplySchedule.mock_getCurrentTimestamp()
         const newTime = now.addn(time)
-        await rewardsDistribution.mock_setBlockTimestamp(newTime)
+        
         await amm.mock_setBlockTimestamp(newTime)
         await supplySchedule.mock_setBlockTimestamp(newTime)
         await clearingHouse.mock_setBlockTimestamp(newTime)
@@ -54,7 +52,6 @@ describe("ClearingHouse add/remove margin Test", () => {
 
         const blockNumber = new BigNumber(await amm.mock_getCurrentBlockNumber())
         const newBlockNumber = blockNumber.addn(movedBlocks)
-        await rewardsDistribution.mock_setBlockNumber(newBlockNumber)
         await amm.mock_setBlockNumber(newBlockNumber)
         await supplySchedule.mock_setBlockNumber(newBlockNumber)
         await clearingHouse.mock_setBlockNumber(newBlockNumber)
@@ -84,7 +81,6 @@ describe("ClearingHouse add/remove margin Test", () => {
         insuranceFund = contracts.insuranceFund
         quoteToken = contracts.quoteToken
         mockPriceFeed = contracts.priceFeed
-        rewardsDistribution = contracts.rewardsDistribution
         clearingHouse = contracts.clearingHouse
         clearingHouseViewer = contracts.clearingHouseViewer
         supplySchedule = contracts.supplySchedule

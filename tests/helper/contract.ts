@@ -25,10 +25,6 @@ import {
     InflationMonitorFakeInstance,
     InsuranceFundFakeContract,
     InsuranceFundFakeInstance,
-    KeeperRewardL1Contract,
-    KeeperRewardL1Instance,
-    KeeperRewardL2Contract,
-    KeeperRewardL2Instance,
     L2PriceFeedMockContract,
     L2PriceFeedMockInstance,
     MinterContract,
@@ -55,8 +51,6 @@ const CUsdtMock = artifacts.require("CUsdtMock") as CUsdtMockContract
 const BalancerMock = artifacts.require("BalancerMock") as BalancerMockContract
 const MultiTokenMediatorMock = artifacts.require("MultiTokenMediatorMock") as MultiTokenMediatorMockContract
 const AMBBridgeMock = artifacts.require("AMBBridgeMock") as AMBBridgeMockContract
-const KeeperRewardL1 = artifacts.require("KeeperRewardL1") as KeeperRewardL1Contract
-const KeeperRewardL2 = artifacts.require("KeeperRewardL2") as KeeperRewardL2Contract
 const ChainlinkPriceFeedFake = artifacts.require("ChainlinkPriceFeedFake") as ChainlinkPriceFeedFakeContract
 
 export enum Side {
@@ -189,8 +183,8 @@ export async function deployL2MockPriceFeed(defaultPrice: BN): Promise<L2PriceFe
 export async function deployInsuranceFund(exchange: string, minter: string): Promise<InsuranceFundFakeInstance> {
     const instance = await InsuranceFund.new()
     await instance.initialize()
-    await instance.setExchange(exchange)
-    await instance.setMinter(minter)
+    // await instance.setExchange(exchange)
+    // await instance.setMinter(minter)
     return instance
 }
 
@@ -249,16 +243,5 @@ export async function deployMockAMBBridge(): Promise<AMBBridgeMockInstance> {
     return instance
 }
 
-export async function deployL1KeeperReward(perpToken: string): Promise<KeeperRewardL1Instance> {
-    const instance = await KeeperRewardL1.new()
-    await instance.initialize(perpToken)
-    return instance
-}
-
-export async function deployL2KeeperReward(perpToken: string): Promise<KeeperRewardL2Instance> {
-    const instance = await KeeperRewardL2.new()
-    await instance.initialize(perpToken)
-    return instance
-}
 
 

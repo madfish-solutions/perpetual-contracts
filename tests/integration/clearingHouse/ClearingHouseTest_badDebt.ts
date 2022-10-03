@@ -7,8 +7,7 @@ import {
     ERC20FakeInstance,
     InsuranceFundFakeInstance,
     L2PriceFeedMockInstance,
-    RewardsDistributionFakeInstance,
-    SupplyScheduleFakeInstance,
+    SupplyScheduleFakeInstance
 } from "../../../types/truffle"
 import { assertionHelper } from "../../helper/assertion-plugin"
 import { Side } from "../../helper/contract"
@@ -27,14 +26,12 @@ describe("Bad Debt Test", () => {
     let insuranceFund: InsuranceFundFakeInstance
     let quoteToken: ERC20FakeInstance
     let mockPriceFeed!: L2PriceFeedMockInstance
-    let rewardsDistribution: RewardsDistributionFakeInstance
     let clearingHouse: ClearingHouseFakeInstance
     let supplySchedule: SupplyScheduleFakeInstance
 
     async function forwardBlockTimestamp(time: number): Promise<void> {
         const now = await supplySchedule.mock_getCurrentTimestamp()
         const newTime = now.addn(time)
-        await rewardsDistribution.mock_setBlockTimestamp(newTime)
         await amm.mock_setBlockTimestamp(newTime)
         await supplySchedule.mock_setBlockTimestamp(newTime)
         await clearingHouse.mock_setBlockTimestamp(newTime)
@@ -42,7 +39,6 @@ describe("Bad Debt Test", () => {
 
         const blockNumber = new BigNumber(await amm.mock_getCurrentBlockNumber())
         const newBlockNumber = blockNumber.addn(movedBlocks)
-        await rewardsDistribution.mock_setBlockNumber(newBlockNumber)
         await amm.mock_setBlockNumber(newBlockNumber)
         await supplySchedule.mock_setBlockNumber(newBlockNumber)
         await clearingHouse.mock_setBlockNumber(newBlockNumber)
@@ -66,7 +62,6 @@ describe("Bad Debt Test", () => {
         insuranceFund = contracts.insuranceFund
         quoteToken = contracts.quoteToken
         mockPriceFeed = contracts.priceFeed
-        rewardsDistribution = contracts.rewardsDistribution
         clearingHouse = contracts.clearingHouse
         supplySchedule = contracts.supplySchedule
 
