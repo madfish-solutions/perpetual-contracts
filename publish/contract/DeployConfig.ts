@@ -50,8 +50,8 @@ export const AMD_USD_AMM: AmmConfig = {
     name: AmmInstanceName.AMDKDAI,
     deployArgs: {
         // base * price
-        quoteAssetReserve: BigNumber.from(10000000).mul(DEFAULT_DIGITS),
-        baseAssetReserve: BigNumber.from(500).mul(DEFAULT_DIGITS), // 500 BTC
+        quoteAssetReserve: BigNumber.from(21000000).mul(DEFAULT_DIGITS),
+        baseAssetReserve: BigNumber.from(318000).mul(DEFAULT_DIGITS), // 318000 AMD
         tradeLimitRatio: BigNumber.from(90)
             .mul(DEFAULT_DIGITS)
             .div(100), // 90% trading limit ratio
@@ -69,8 +69,7 @@ export const AMD_USD_AMM: AmmConfig = {
     },
     properties: {
         maxHoldingBaseAsset: BigNumber.from(DEFAULT_DIGITS)
-            .mul(25)
-            .div(100), // 0.25 BTC ~= $5000 USD,
+            .mul(150), // AMD BTC ~= $10000 USD,
         openInterestNotionalCap: BigNumber.from(DEFAULT_DIGITS).mul(500000), // $500K
     },
 }
@@ -79,8 +78,8 @@ export const AAPL_USD_AMM: AmmConfig = {
     name: AmmInstanceName.AAPLKDAI,
     deployArgs: {
         // base * price
-        quoteAssetReserve: BigNumber.from(10000000).mul(DEFAULT_DIGITS),
-        baseAssetReserve: BigNumber.from(20000).mul(DEFAULT_DIGITS), // 20000 ETH
+        quoteAssetReserve: BigNumber.from(21000000).mul(DEFAULT_DIGITS),
+        baseAssetReserve: BigNumber.from(150000).mul(DEFAULT_DIGITS), // 150000 AAPL
         tradeLimitRatio: BigNumber.from(90)
             .mul(DEFAULT_DIGITS)
             .div(100), // 90% trading limit ratio
@@ -97,17 +96,17 @@ export const AAPL_USD_AMM: AmmConfig = {
             .div(10000), // 0.1%
     },
     properties: {
-        maxHoldingBaseAsset: DEFAULT_DIGITS.mul(10), // 10 ETH ~= $5000 USD
+        maxHoldingBaseAsset: DEFAULT_DIGITS.mul(70), // 70 AAPL ~= $10000 USD
         openInterestNotionalCap: BigNumber.from(DEFAULT_DIGITS).mul(500000), // $500K
     },
 }
 
 export const SHOP_USD_AMM: AmmConfig = {
-  name: AmmInstanceName.AAPLKDAI,
+  name: AmmInstanceName.SHOPKDAI,
   deployArgs: {
     // base * price
-    quoteAssetReserve: BigNumber.from(10000000).mul(DEFAULT_DIGITS),
-    baseAssetReserve: BigNumber.from(20000).mul(DEFAULT_DIGITS), // 20000 ETH
+    quoteAssetReserve: BigNumber.from(21000000).mul(DEFAULT_DIGITS),
+    baseAssetReserve: BigNumber.from(777000).mul(DEFAULT_DIGITS), // 777000 SHOP
     tradeLimitRatio: BigNumber.from(90)
       .mul(DEFAULT_DIGITS)
       .div(100), // 90% trading limit ratio
@@ -124,7 +123,7 @@ export const SHOP_USD_AMM: AmmConfig = {
       .div(10000), // 0.1%
   },
   properties: {
-    maxHoldingBaseAsset: DEFAULT_DIGITS.mul(10), // 10 ETH ~= $5000 USD
+    maxHoldingBaseAsset: DEFAULT_DIGITS.mul(370), // 370 SHOP ~= $10000 USD
     openInterestNotionalCap: BigNumber.from(DEFAULT_DIGITS).mul(500000), // $500K
   },
 };
