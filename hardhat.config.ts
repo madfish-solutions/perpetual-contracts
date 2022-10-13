@@ -11,11 +11,8 @@ import { TASK_COMPILE } from "hardhat/builtin-tasks/task-names"
 import { HardhatUserConfig, task } from "hardhat/config"
 import "solidity-coverage"
 import {
-    ARTIFACTS_DIR, BAOBAB_PK, BAOBAB_URL, DIODON_URL, ETHERSCAN_API_KEY,
-    GAS_PRICE,
-    ROOT_DIR,
-    SRC_DIR,
-    COVERAGE_URL
+    ARTIFACTS_DIR, BAOBAB_PK, BAOBAB_URL, COVERAGE_URL, DIODON_URL, ETHERSCAN_API_KEY, ROOT_DIR,
+    SRC_DIR
 } from "./constants"
 import { TASK_CHECK_CHAINLINK, TASK_MIGRATE, TASK_SIMULATE } from "./scripts/common"
 

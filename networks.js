@@ -3,9 +3,9 @@ const {
     GAS_PRICE,
     GAS,
     BAOBAB_URL,
-    DIODON_URL
-} = require("./constants")
-const HDWalletProvider = require("@truffle/hdwallet-provider")
+    DIODON_URL,
+} = require("./constants");
+const HDWalletProvider = require("@truffle/hdwallet-provider");
 
 /*eslint-disable */
 module.exports = {
@@ -27,4 +27,4 @@ module.exports = {
             networkId: 1042,
         },
     },
-}
+};

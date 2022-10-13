@@ -14,7 +14,6 @@ import { BlockContext } from "./utils/BlockContext.sol";
 import { DecimalERC20 } from "./utils/DecimalERC20.sol";
 import { IMinter } from "./interface/IMinter.sol";
 import { IAmm } from "./interface/IAmm.sol";
-import { IInflationMonitor } from "./interface/IInflationMonitor.sol";
 
 contract InsuranceFund is IInsuranceFund, PerpFiOwnableUpgrade, BlockContext, ReentrancyGuardUpgradeSafe, DecimalERC20 {
     using Decimal for Decimal.decimal;
@@ -43,7 +42,6 @@ contract InsuranceFund is IInsuranceFund, PerpFiOwnableUpgrade, BlockContext, Re
     IExchangeWrapper public exchange;
     IERC20 public perpToken;
     IMinter public minter;
-    IInflationMonitor public inflationMonitor;
     address private beneficiary;
 
     //**********************************************************//
@@ -106,9 +104,6 @@ contract InsuranceFund is IInsuranceFund, PerpFiOwnableUpgrade, BlockContext, Re
      * @dev only owner can call. Emit `ShutdownAllAmms` event
      */
     function shutdownAllAmm() external onlyOwner {
-        if (!inflationMonitor.isOverMintThreshold()) {
-            return;
-        }
         for (uint256 i; i < amms.length; i++) {
             amms[i].shutdown();
         }
@@ -178,10 +173,6 @@ contract InsuranceFund is IInsuranceFund, PerpFiOwnableUpgrade, BlockContext, Re
     function setMinter(IMinter _minter) public onlyOwner {
         minter = _minter;
         perpToken = minter.getPerpToken();
-    }
-
-    function setInflationMonitor(IInflationMonitor _inflationMonitor) external onlyOwner {
-        inflationMonitor = _inflationMonitor;
     }
 
     function getQuoteTokenLength() public view returns (uint256) {

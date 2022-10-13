@@ -114,7 +114,7 @@ export const SHOP_USD_AMM: AmmConfig = {
     fluctuation: BigNumber.from(12)
       .mul(DEFAULT_DIGITS)
       .div(1000), // 1.2%
-    priceFeedKey: PriceFeedKey.AAPL,
+    priceFeedKey: PriceFeedKey.SHOP,
     tollRatio: BigNumber.from(0)
       .mul(DEFAULT_DIGITS)
       .div(10000), // 0.0%

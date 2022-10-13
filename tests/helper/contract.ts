@@ -32,7 +32,9 @@ import {
     MultiTokenMediatorMockContract,
     MultiTokenMediatorMockInstance,
     SupplyScheduleFakeContract,
-    SupplyScheduleFakeInstance
+    SupplyScheduleFakeInstance,
+    MetaTxGatewayContract,
+    MetaTxGatewayInstance,
 } from "../../types/truffle"
 import { Decimal, toFullDigit } from "./number"
 
@@ -52,6 +54,9 @@ const BalancerMock = artifacts.require("BalancerMock") as BalancerMockContract
 const MultiTokenMediatorMock = artifacts.require("MultiTokenMediatorMock") as MultiTokenMediatorMockContract
 const AMBBridgeMock = artifacts.require("AMBBridgeMock") as AMBBridgeMockContract
 const ChainlinkPriceFeedFake = artifacts.require("ChainlinkPriceFeedFake") as ChainlinkPriceFeedFakeContract
+const MetaTxGateway = artifacts.require(
+  "MetaTxGateway",
+) as MetaTxGatewayContract;
 
 export enum Side {
     BUY = 0,
@@ -243,5 +248,12 @@ export async function deployMockAMBBridge(): Promise<AMBBridgeMockInstance> {
     return instance
 }
 
-
-
+export async function deployMetaTxGateway(
+  name: string,
+  version: string,
+  chainIdL1: number,
+): Promise<MetaTxGatewayInstance> {
+  const instance = await MetaTxGateway.new();
+  instance.initialize(name, version, chainIdL1);
+  return instance;
+}

@@ -1,5 +1,5 @@
 // all lower-case, no dash; otherwise AWS deployment might fail
-export type Stage = "production" | "baobab" | "local"
+export type Stage = "production" | "baobab" | "local" | "baobab-test"
 export type Network =  "baobab" | "diodon" | "localhost" | "hardhat"
 export enum Layer {
     Layer1 = "layer1",

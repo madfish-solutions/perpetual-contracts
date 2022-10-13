@@ -1,13 +1,16 @@
 import { default as BN } from "bn.js"
 import {
-    AmmFakeInstance,
-    AmmReaderInstance,
-    ClearingHouseFakeInstance,
-    ClearingHouseViewerInstance,
-    ERC20FakeInstance,
-    ExchangeWrapperMockInstance, InsuranceFundFakeInstance,
-    L2PriceFeedMockInstance, SupplyScheduleFakeInstance
-} from "../../types/truffle"
+  AmmFakeInstance,
+  AmmReaderInstance,
+  ClearingHouseFakeInstance,
+  ClearingHouseViewerInstance,
+  ERC20FakeInstance,
+  ExchangeWrapperMockInstance,
+  InsuranceFundFakeInstance,
+  L2PriceFeedMockInstance,
+  SupplyScheduleFakeInstance,
+  MetaTxGatewayInstance,
+} from "../../types/truffle";
 import {
   deployAmm,
   deployAmmReader,
@@ -18,6 +21,7 @@ import {
   deployL2MockPriceFeed,
   deploySupplySchedule,
   deployMockExchangeWrapper,
+  deployMetaTxGateway
 } from "./contract";
 import { toDecimal, toFullDigit } from "./number"
 
@@ -31,6 +35,7 @@ export interface PerpContracts {
     amm: AmmFakeInstance
     ammReader: AmmReaderInstance
     clearingHouseViewer: ClearingHouseViewerInstance
+    metaTxGateway: MetaTxGatewayInstance
     // inflationMonitor: InflationMonitorFakeInstance
     // minter: MinterInstance
 }
@@ -84,6 +89,7 @@ export async function fullDeploy(args: ContractDeployArgs): Promise<PerpContract
     } = args
 
     const quoteToken = await deployErc20Fake(quoteTokenAmount, "Tether", "USDT", new BN(quoteTokenDecimals))
+    const metaTxGateway = await deployMetaTxGateway("Perp", "1", 1234) // default hardhat evm chain ID
     const priceFeed = await deployL2MockPriceFeed(toFullDigit(100))
 
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -105,6 +111,7 @@ export async function fullDeploy(args: ContractDeployArgs): Promise<PerpContract
         toDecimal(0.05),
         insuranceFund.address,
     )
+    await metaTxGateway.addToWhitelists(clearingHouse.address);
     await clearingHouse.setTollPool(sender, { from: sender })
     const clearingHouseViewer = await deployClearingHouseViewer(clearingHouse.address)
 
@@ -150,6 +157,7 @@ export async function fullDeploy(args: ContractDeployArgs): Promise<PerpContract
         ammReader,
         clearingHouseViewer,
         supplySchedule,
-        exchangeWrapper
+        exchangeWrapper,
+        metaTxGateway
     }
 }
