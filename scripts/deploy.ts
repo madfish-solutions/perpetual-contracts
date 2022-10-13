@@ -12,7 +12,7 @@ const { readdir } = promises
 export async function deploy(stage: Stage, options?: ExecOptions): Promise<void> {
     const settings = new SettingsDao(stage)
 
-    if ("test" === stage) {
+    if ("local" === stage) {
         settings.resetNextMigration()
     }
     const nextMigration = settings.getSystemDeploySettings().nextMigration

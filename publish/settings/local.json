@@ -1,33 +1,34 @@
 {
   "layers": {
     "layer1": {
-      "chainId": 1,
-      "network": "homestead",
+      "chainId": 31337,
+      "network": "localhost",
       "externalContracts": {
         "foundationGovernance": "0xa230A4f6F38D904C2eA1eE95d8b2b8b7350e3d79",
         "rewardGovernance": "0x9FE5f5bbbD3f2172Fa370068D26185f3d82ed9aC",
         "diodonBridge": "0xD4075FB57fCf038bFc702c915Ef9592534bED5c1",
         "baobabBridge": "0x30F693708fc604A57F1958E3CFa059F902e6d4CB",
-        "arbitrageur": "0x68dfc526037E9030c8F813D014919CC89E7d4d74",
-        "proxyAdmin": "0x29853EcF31eaedcD9074a11A85A8C8b689165F0b"
+        "chainlinkOracle": "0x68dfc526037E9030c8F813D014919CC89E7d4d74",
+        "kdai": "0x68dfc526037E9030c8F813D014919CC89E7d4d74"
       }
     },
     "layer2": {
-      "chainId": 100,
-      "network": "xdai",
+      "chainId": 31337,
+      "network": "localhost",
       "externalContracts": {
         "foundationGovernance": "0xa230A4f6F38D904C2eA1eE95d8b2b8b7350e3d79",
         "rewardGovernance": "0x9FE5f5bbbD3f2172Fa370068D26185f3d82ed9aC",
         "diodonBridge": "0xD4075FB57fCf038bFc702c915Ef9592534bED5c1",
         "baobabBridge": "0x30F693708fc604A57F1958E3CFa059F902e6d4CB",
         "arbitrageur": "0x68dfc526037E9030c8F813D014919CC89E7d4d74",
-        "proxyAdmin": "0x29853EcF31eaedcD9074a11A85A8C8b689165F0b",
-        "referral": "0xF1d5BA04a25A6D88c468af932BFe2B1e78db7B45"
+        "chainlinkOracle": "0x68dfc526037E9030c8F813D014919CC89E7d4d74",
+        "trustedForwarder": "0x68dfc526037E9030c8F813D014919CC89E7d4d74",
+        "kdai": "0x68dfc526037E9030c8F813D014919CC89E7d4d74"
       }
     }
   },
   "nextMigration": {
-    "batchIndex": 46,
+    "batchIndex": 2,
     "taskIndex": 0
   }
 }

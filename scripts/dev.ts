@@ -6,7 +6,8 @@ import { deploy } from "./deploy"
 import { getNpmBin } from "./helper"
 import { getOpenZeppelinConfigFile } from "./path"
 
-export async function devEvm(onDeployed?: () => Promise<boolean>): Promise<void> {
+//onDeployed?: () => Promise<boolean>
+export async function devEvm(): Promise<void> {
     const cwd = resolve(__dirname, "..")
     const env = {
         DEPLOY_MODE: DeployMode.Init,
@@ -33,13 +34,15 @@ export async function devEvm(onDeployed?: () => Promise<boolean>): Promise<void>
                     // TODO wrap it with system deployer even though we only need layer 2 for local tests.
                     // This is so that we could re-use the scripts for creating metadata/${stage}.json
                     // await asyncExec("hardhat run --network localhost scripts/deploy.ts", { cwd, env })
-                    await deploy("test", { cwd, env })
 
-                    // onDeployed() must return true if it wishes to keep hardhat node running
-                    if (onDeployed && !(await onDeployed())) {
-                        console.log("killing ethereum node...")
-                        child.kill("SIGINT")
-                    }
+                    await deploy("local", { cwd, env })
+                    // // onDeployed() must return true if it wishes to keep hardhat node running
+                    // if (onDeployed && !(await onDeployed())) {
+                    //     console.log("killing ethereum node...")
+                    //     child.kill("SIGINT")
+                    // }
+                    console.log("killing ethereum node...")
+                    child.kill("SIGINT")
                 } catch (e) {
                     child.kill("SIGINT") // Terminate hardhat node
                     error = e

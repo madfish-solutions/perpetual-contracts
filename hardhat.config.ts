@@ -11,24 +11,8 @@ import { TASK_COMPILE } from "hardhat/builtin-tasks/task-names"
 import { HardhatUserConfig, task } from "hardhat/config"
 import "solidity-coverage"
 import {
-    ARTIFACTS_DIR,
-    COVERAGE_URL,
-    ETHERSCAN_API_KEY,
-    GAS_PRICE,
-    HOMESTEAD_MNEMONIC,
-    HOMESTEAD_URL,
-    KOVAN_MNEMONIC,
-    KOVAN_URL,
-    RINKEBY_MNEMONIC,
-    RINKEBY_URL,
-    ROOT_DIR,
-    ROPSTEN_MNEMONIC,
-    ROPSTEN_URL,
-    SOKOL_MNEMONIC,
-    SOKOL_URL,
-    SRC_DIR,
-    XDAI_MNEMONIC,
-    XDAI_URL,
+    ARTIFACTS_DIR, BAOBAB_PK, BAOBAB_URL, COVERAGE_URL, DIODON_URL, ETHERSCAN_API_KEY, ROOT_DIR,
+    SRC_DIR
 } from "./constants"
 import { TASK_CHECK_CHAINLINK, TASK_MIGRATE, TASK_SIMULATE } from "./scripts/common"
 
@@ -86,48 +70,25 @@ const config: HardhatUserConfig = {
         coverage: {
             url: COVERAGE_URL,
         },
-        ropsten: {
-            url: ROPSTEN_URL,
-            gasPrice: GAS_PRICE,
-            accounts: {
-                mnemonic: ROPSTEN_MNEMONIC,
+        baobab: {
+            url: BAOBAB_URL,
+            httpHeaders: {
+              'Authorization': 'Basic ' + Buffer.from(process.env.ACCESS_KEY_ID + ':' + process.env.SECRET_ACCESS_KEY).toString('base64'),
+              'x-chain-id': '1001',
             },
-        },
-        kovan: {
-            url: KOVAN_URL,
-            gasPrice: GAS_PRICE,
-            accounts: {
-                mnemonic: KOVAN_MNEMONIC,
-            },
-        },
-        rinkeby: {
-            url: RINKEBY_URL,
-            gasPrice: GAS_PRICE,
-            accounts: {
-                mnemonic: RINKEBY_MNEMONIC,
-            },
-        },
-        homestead: {
-            url: HOMESTEAD_URL,
-            gasPrice: GAS_PRICE,
-            accounts: {
-                mnemonic: HOMESTEAD_MNEMONIC,
-            },
-        },
-        sokol: {
-            url: SOKOL_URL,
-            gasPrice: GAS_PRICE,
-            accounts: {
-                mnemonic: SOKOL_MNEMONIC,
-            },
-        },
-        xdai: {
-            url: XDAI_URL,
-            gasPrice: GAS_PRICE,
-            accounts: {
-                mnemonic: XDAI_MNEMONIC,
-            },
-        },
+            accounts: [
+              BAOBAB_PK || ''
+            ],
+            chainId: 1001,
+            gas: 8500000,
+          },
+        diodon: {
+            url: DIODON_URL,
+            accounts: [
+              BAOBAB_PK || ''
+            ],
+          chainId: 1042,
+          gas: 8500000,},
     },
     solidity: {
         version: "0.6.9",
