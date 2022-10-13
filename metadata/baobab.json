@@ -38,11 +38,11 @@
         },
         "AAPLKDAI": {
           "name": "Amm",
-          "address": "0x00c0086a3c2bf842A0A446d8B7d6c395dd63647B"
+          "address": "0x080486EeDAF43c5bD8495fa5AEACa21eD23a58Bf"
         },
         "AMDKDAI": {
           "name": "Amm",
-          "address": "0x38D58DD8d0890dAC771A9eeF7eEd9E773e0DAb1e"
+          "address": "0x7d1eCCA059F4C06669C66E4E5708F07fCB5D555D"
         },
         "ChainlinkPriceFeed": {
           "name": "ChainlinkPriceFeed",
@@ -50,7 +50,7 @@
         },
         "SHOPKDAI": {
           "name": "Amm",
-          "address": "0xce5E9a5102fadEC438a2E209b64b0e1797F9be3B"
+          "address": "0x1B3e5D5bc9223E39581062f929DaB6D1dc12C7EA"
         }
       },
       "accounts": [],
