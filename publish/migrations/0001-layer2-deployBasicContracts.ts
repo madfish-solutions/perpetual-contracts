@@ -2,15 +2,21 @@
 
 import { Layer } from "../../scripts/common"
 import {
-    AmmReader, ChainlinkPriceFeed, ClearingHouse,
-    ClearingHouseViewer, InsuranceFund
+  AmmReader, ChainlinkPriceFeed, ClearingHouse,
+  ClearingHouseViewer, InsuranceFund, MetaTxGateway
 } from "../../types/ethers"
 import { AmmInstanceName, ContractFullyQualifiedName } from "../ContractName"
 import { MigrationContext, MigrationDefinition } from "../Migration"
 
 const migration: MigrationDefinition = {
     getTasks: (context: MigrationContext) => [
-
+        async (): Promise<void> => {
+            console.log("deploy metaTxGateway...")
+            const chainId = context.settingsDao.getChainId(Layer.Layer1)
+            await context.factory
+                .create<MetaTxGateway>(ContractFullyQualifiedName.MetaTxGateway)
+                .deployUpgradableContract("Diodon", "1", chainId)
+        },
         async (): Promise<void> => {
             console.log("deploy insuranceFund...")
             await context.factory
@@ -48,6 +54,14 @@ const migration: MigrationDefinition = {
             await (
                 await clearingHouse.setWhitelist(context.settingsDao.getExternalContracts(Layer.Layer2).arbitrageur!)
             ).wait(context.deployConfig.confirmations)
+        },
+        async (): Promise<void> => {
+            console.log("metaTxGateway.addToWhitelists...")
+            const clearingHouse = context.factory.create<ClearingHouse>(ContractFullyQualifiedName.ClearingHouse)
+            const metaTxGateway = await context.factory
+                .create<MetaTxGateway>(ContractFullyQualifiedName.MetaTxGateway)
+                .instance()
+            await (await metaTxGateway.addToWhitelists(clearingHouse.address!)).wait(context.deployConfig.confirmations)
         },
         async (): Promise<void> => {
             console.log("deploy AAPLkDAI amm...")
